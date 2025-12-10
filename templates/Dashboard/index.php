@@ -1,29 +1,29 @@
 <div class="container-fluid mt-4">
-    <h1 class="mb-4">Nadzorna plošča</h1>
+    <h1 class="mb-4"><?= __('Dashboard') ?></h1>
 
     <div class="row">
         <!-- Skupno stanje -->
         <div class="col-md-4 mb-4">
             <div class="card">
                 <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0">Skupno stanje</h5>
+                    <h5 class="mb-0"><?= __('Total balance') ?></h5>
                 </div>
                 <div class="card-body">
                     <?php foreach ($balances as $personId => $balance): ?>
                         <div class="mb-3 p-3 bg-light rounded">
                             <h6 class="fw-bold"><?= h($balance['name']) ?></h6>
                             <small class="text-muted">
-                                Plačal: <strong><?= number_format($balance['paid'], 2) ?> €</strong><br>
-                                Njegov delež: <strong><?= number_format($balance['owes'], 2) ?> €</strong>
+                                <?= __('Paid') ?>: <strong><?= number_format($balance['paid'], 2) ?> €</strong><br>
+                                <?= __('Their share') ?>: <strong><?= number_format($balance['owes'], 2) ?> €</strong>
                             </small>
                             <div class="mt-2">
                                 <?php if ($balance['balance'] >= 0): ?>
                                     <span class="badge bg-success">
-                                        Terjatev: <?= number_format(abs($balance['balance']), 2) ?> €
+                                        <?= __('Claim') ?>: <?= number_format(abs($balance['balance']), 2) ?> €
                                     </span>
                                 <?php else: ?>
                                     <span class="badge bg-danger">
-                                        Dolg: <?= number_format(abs($balance['balance']), 2) ?> €
+                                        <?= __('Debt') ?>: <?= number_format(abs($balance['balance']), 2) ?> €
                                     </span>
                                 <?php endif; ?>
                             </div>
@@ -37,13 +37,13 @@
         <div class="col-md-4 mb-4">
             <div class="card">
                 <div class="card-header bg-danger text-white">
-                    <h5 class="mb-0">Kdo dolguje komu</h5>
+                    <h5 class="mb-0"><?= __('Who owes whom') ?></h5>
                 </div>
                 <div class="card-body">
                     <?php if (empty($suggestedSettlements)): ?>
                         <div class="text-center text-success">
                             <i class="fas fa-check-circle fa-3x mb-2"></i>
-                            <p>Vsi dolgovi so poravnani! 🎉</p>
+                            <p><?= __('All debts are settled!') ?> 🎉</p>
                         </div>
                     <?php else: ?>
                         <?php foreach ($suggestedSettlements as $debt): ?>
@@ -80,26 +80,26 @@
         <div class="col-md-4 mb-4">
             <div class="card">
                 <div class="card-header bg-success text-white">
-                    <h5 class="mb-0">Hitre akcije</h5>
+                    <h5 class="mb-0"><?= __('Quick actions') ?></h5>
                 </div>
                 <div class="card-body">
                     <?= $this->Html->link(
-                        '+ Nov strošek',
+                        '+ ' . __('New expense'),
                         ['controller' => 'Expenses', 'action' => 'add'],
                         ['class' => 'btn btn-success w-100 mb-2']
                     ) ?>
                     <?= $this->Html->link(
-                        '+ Novo plačilo',
+                        '+ ' . __('New payment'),
                         ['controller' => 'Payments', 'action' => 'add'],
                         ['class' => 'btn btn-primary w-100 mb-2']
                     ) ?>
                     <?= $this->Html->link(
-                        '+ Nova oseba',
+                        '+ ' . __('New person'),
                         ['controller' => 'People', 'action' => 'add'],
                         ['class' => 'btn btn-info w-100 mb-2']
                     ) ?>
                     <?= $this->Html->link(
-                        'Ponavljajoči stroški',
+                        __('Recurring expenses'),
                         ['controller' => 'RecurringExpenses', 'action' => 'index'],
                         ['class' => 'btn btn-warning w-100']
                     ) ?>

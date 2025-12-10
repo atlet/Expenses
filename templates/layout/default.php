@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -18,6 +19,7 @@ $cakeDescription = 'Sledilnik stroškov pisarne';
 ?>
 <!DOCTYPE html>
 <html lang="sl">
+
 <head>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,7 +31,7 @@ $cakeDescription = 'Sledilnik stroškov pisarne';
 
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -53,7 +55,7 @@ $cakeDescription = 'Sledilnik stroškov pisarne';
         }
 
         .navbar {
-            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
         }
 
         .navbar-brand {
@@ -72,18 +74,18 @@ $cakeDescription = 'Sledilnik stroškov pisarne';
 
         .card {
             border: none;
-            box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);
-            transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
+            transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
             margin-bottom: 1.5rem;
         }
 
         .card:hover {
-            box-shadow: 0 4px 8px rgba(0,0,0,.16), 0 3px 6px rgba(0,0,0,.23);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, .16), 0 3px 6px rgba(0, 0, 0, .23);
         }
 
         .card-header {
             font-weight: 600;
-            border-bottom: 2px solid rgba(0,0,0,.1);
+            border-bottom: 2px solid rgba(0, 0, 0, .1);
         }
 
         .table {
@@ -110,7 +112,7 @@ $cakeDescription = 'Sledilnik stroškov pisarne';
 
         .btn:hover {
             transform: translateY(-1px);
-            box-shadow: 0 2px 4px rgba(0,0,0,.2);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
         }
 
         .alert {
@@ -165,6 +167,7 @@ $cakeDescription = 'Sledilnik stroškov pisarne';
                 transform: translateX(100%);
                 opacity: 0;
             }
+
             to {
                 transform: translateX(0);
                 opacity: 1;
@@ -194,7 +197,7 @@ $cakeDescription = 'Sledilnik stroškov pisarne';
             .table-responsive {
                 font-size: 0.875rem;
             }
-            
+
             .card {
                 margin-bottom: 1rem;
             }
@@ -249,6 +252,7 @@ $cakeDescription = 'Sledilnik stroškov pisarne';
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -258,16 +262,16 @@ $cakeDescription = 'Sledilnik stroškov pisarne';
                 '/',
                 ['class' => 'navbar-brand', 'escape' => false]
             ) ?>
-            
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
+
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <?= $this->Html->link(
-                            '<i class="fas fa-home me-1"></i>Nadzorna plošča',
+                            '<i class="fas fa-home me-1"></i>' . __('Dashboard'),
                             ['controller' => 'Dashboard', 'action' => 'index'],
                             [
                                 'class' => 'nav-link' . ($this->request->getParam('controller') === 'Dashboard' ? ' active' : ''),
@@ -316,8 +320,33 @@ $cakeDescription = 'Sledilnik stroškov pisarne';
                         ) ?>
                     </li>
                 </ul>
-                
+
                 <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-globe me-1"></i>
+                            <?php
+                            $currentLocale = \Cake\I18n\I18n::getLocale();
+                            echo $currentLocale === 'sl_SI' ? 'Slovenščina' : 'English';
+                            ?>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+                            <li>
+                                <?= $this->Html->link(
+                                    '<i class="fas fa-flag me-2"></i>English',
+                                    ['controller' => 'Language', 'action' => 'switch', '?' => ['locale' => 'en_US']],
+                                    ['class' => 'dropdown-item', 'escape' => false]
+                                ) ?>
+                            </li>
+                            <li>
+                                <?= $this->Html->link(
+                                    '<i class="fas fa-flag me-2"></i>Slovenščina',
+                                    ['controller' => 'Language', 'action' => 'switch', '?' => ['locale' => 'sl_SI']],
+                                    ['class' => 'dropdown-item', 'escape' => false]
+                                ) ?>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-plus-circle me-1"></i>Novo
@@ -337,7 +366,9 @@ $cakeDescription = 'Sledilnik stroškov pisarne';
                                     ['class' => 'dropdown-item', 'escape' => false]
                                 ) ?>
                             </li>
-                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <li>
                                 <?= $this->Html->link(
                                     '<i class="fas fa-user-plus me-2"></i>Nova oseba',
@@ -380,7 +411,7 @@ $cakeDescription = 'Sledilnik stroškov pisarne';
                 <div class="col-md-3">
                     <h6>Hitre povezave</h6>
                     <ul class="list-unstyled">
-                        <li><?= $this->Html->link('Nadzorna plošča', ['controller' => 'Dashboard', 'action' => 'index']) ?></li>
+                        <li><?= $this->Html->link(__('Dashboard'), ['controller' => 'Dashboard', 'action' => 'index']) ?></li>
                         <li><?= $this->Html->link('Stroški', ['controller' => 'Expenses', 'action' => 'index']) ?></li>
                         <li><?= $this->Html->link('Plačila', ['controller' => 'Payments', 'action' => 'index']) ?></li>
                     </ul>
@@ -406,7 +437,7 @@ $cakeDescription = 'Sledilnik stroškov pisarne';
 
     <!-- Bootstrap 5 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <!-- Custom JS -->
     <script>
         // Auto-hide flash messages after 5 seconds
@@ -443,7 +474,7 @@ $cakeDescription = 'Sledilnik stroškov pisarne';
                     submitBtn.disabled = true;
                     const originalText = submitBtn.innerHTML;
                     submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Nalagam...';
-                    
+
                     // Re-enable after 3 seconds as fallback
                     setTimeout(function() {
                         submitBtn.disabled = false;
@@ -455,11 +486,12 @@ $cakeDescription = 'Sledilnik stroškov pisarne';
 
         // Tooltips initialization (if using Bootstrap tooltips)
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl);
         });
     </script>
 
     <?= $this->fetch('script') ?>
 </body>
+
 </html>

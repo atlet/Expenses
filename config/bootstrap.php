@@ -45,6 +45,7 @@ use Cake\Mailer\TransportFactory;
 use Cake\Routing\Router;
 use Cake\Utility\Security;
 use function Cake\Core\env;
+use Cake\I18n\I18n;
 
 /*
  * Load global functions for collections, translations, debugging etc.
@@ -102,6 +103,9 @@ if (Configure::read('debug')) {
     Configure::write('Cache._cake_model_.duration', '+2 minutes');
     Configure::write('Cache._cake_translations_.duration', '+2 minutes');
 }
+
+// Set default locale
+I18n::setLocale('sl_SI'); // lahko spremenite v en_US
 
 /*
  * Set the default server timezone. Using UTC makes time calculations / conversions easier.
