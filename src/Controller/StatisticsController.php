@@ -27,14 +27,14 @@ class StatisticsController extends AppController {
         $expensesByCategory = $expensesTable->find()
             ->select([
                 'category_id' => 'expense_category_id',
-                'category_name' => 'ExpenseCategories.name',
-                'category_name_en' => 'ExpenseCategories.name_en',
-                'category_color' => 'ExpenseCategories.color',
-                'category_icon' => 'ExpenseCategories.icon',
+                'category_name' => 'expense_categories.name',
+                'category_name_en' => 'expense_categories.name_en',
+                'category_color' => 'expense_categories.color',
+                'category_icon' => 'expense_categories.icon',
                 'total' => 'SUM(Expenses.amount + Expenses.commission)',
                 'count' => 'COUNT(Expenses.id)',
             ])
-            ->leftJoin('ExpenseCategories', ['ExpenseCategories.id = Expenses.expense_category_id'])
+            ->leftJoin('expense_categories', ['expense_categories.id = Expenses.expense_category_id'])
             ->group(['expense_category_id'])
             ->order(['total' => 'DESC'])
             ->toArray();
@@ -55,14 +55,14 @@ class StatisticsController extends AppController {
         // Mesečni trend (zadnjih 12 mesecev)
         $monthlyTrend = $expensesTable->find()
             ->select([
-                'month' => "DATE_FORMAT(expense_date, '%Y-%m')",
+                'month' => "strftime('%Y-%m', expense_date)",
                 'total' => 'SUM(amount + commission)',
                 'count' => 'COUNT(id)',
             ])
             ->where([
                 'expense_date >=' => date('Y-m-d', strtotime('-12 months')),
             ])
-            ->group(["DATE_FORMAT(expense_date, '%Y-%m')"])
+            ->group(["strftime('%Y-%m', expense_date)"])
             ->order(['month' => 'ASC'])
             ->toArray();
 
