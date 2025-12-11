@@ -26,6 +26,16 @@ class ExpensesTable extends Table {
             'foreignKey' => 'expense_id',
             'dependent' => true,
         ]);
+
+        $this->belongsTo('ExpenseCategories', [
+            'foreignKey' => 'expense_category_id',
+            'joinType' => 'LEFT',
+        ]);
+
+        $this->belongsTo('Suppliers', [
+            'foreignKey' => 'supplier_id',
+            'joinType' => 'LEFT',
+        ]);
     }
 
     public function validationDefault(Validator $validator): Validator {
@@ -57,6 +67,14 @@ class ExpensesTable extends Table {
         $validator
             ->scalar('notes')
             ->allowEmptyString('notes');
+
+        $validator
+            ->boolean('is_paid')
+            ->notEmptyString('is_paid');
+
+        $validator
+            ->date('paid_date')
+            ->allowEmptyDate('paid_date');
 
         return $validator;
     }

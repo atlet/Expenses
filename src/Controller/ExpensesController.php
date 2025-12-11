@@ -7,7 +7,7 @@ namespace App\Controller;
 class ExpensesController extends AppController {
     public function index() {
         $expenses = $this->Expenses->find('all')
-            ->contain(['PaidBy', 'ExpenseSplits.People'])
+            ->contain(['PaidBy', 'ExpenseSplits.People', 'ExpenseCategories', 'Suppliers'])
             ->order(['Expenses.expense_date' => 'DESC']);
 
         $this->set(compact('expenses'));
@@ -41,19 +41,27 @@ class ExpensesController extends AppController {
             }
             $data['expense_splits'] = $expenseSplits;
 
+            // Če je označeno kot plačano, nastavi paid_date na danes
+            if (!empty($data['is_paid']) && empty($data['paid_date'])) {
+                $data['paid_date'] = date('Y-m-d');
+            }
+
             $expense = $this->Expenses->patchEntity($expense, $data, [
                 'associated' => ['ExpenseSplits']
             ]);
 
             if ($this->Expenses->save($expense)) {
-                $this->Flash->success(__('Strošek je bil dodan.'));
+                $this->Flash->success(__('The expense has been saved.'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Stroška ni bilo mogoče dodati. Prosim poskusite ponovno.'));
+            $this->Flash->error(__('The expense could not be saved. Please try again.'));
         }
 
         $people = $this->Expenses->PaidBy->find('list');
-        $this->set(compact('expense', 'people'));
+        $categories = $this->Expenses->ExpenseCategories->find('list')->where(['is_active' => true])->order(['sort_order' => 'ASC']);
+        $suppliers = $this->Expenses->Suppliers->find('list')->where(['is_active' => true])->order(['name' => 'ASC']);
+
+        $this->set(compact('expense', 'people', 'categories', 'suppliers'));
     }
 
     public function edit($id = null) {
@@ -78,24 +86,32 @@ class ExpensesController extends AppController {
             }
             $data['expense_splits'] = $expenseSplits;
 
+            // Če je označeno kot plačano in še nima datuma plačila
+            if (!empty($data['is_paid']) && empty($data['paid_date'])) {
+                $data['paid_date'] = date('Y-m-d');
+            }
+
             $expense = $this->Expenses->patchEntity($expense, $data, [
                 'associated' => ['ExpenseSplits']
             ]);
 
             if ($this->Expenses->save($expense)) {
-                $this->Flash->success(__('Strošek je bil posodobljen.'));
+                $this->Flash->success(__('The expense has been updated.'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Stroška ni bilo mogoče posodobiti. Prosim poskusite ponovno.'));
+            $this->Flash->error(__('The expense could not be updated. Please try again.'));
         }
 
         $people = $this->Expenses->PaidBy->find('list');
+        $categories = $this->Expenses->ExpenseCategories->find('list')->where(['is_active' => true])->order(['sort_order' => 'ASC']);
+        $suppliers = $this->Expenses->Suppliers->find('list')->where(['is_active' => true])->order(['name' => 'ASC']);
+
         $selectedPeople = [];
         foreach ($expense->expense_splits as $split) {
             $selectedPeople[] = $split->person_id;
         }
 
-        $this->set(compact('expense', 'people', 'selectedPeople'));
+        $this->set(compact('expense', 'people', 'categories', 'suppliers', 'selectedPeople'));
     }
 
     public function delete($id = null) {

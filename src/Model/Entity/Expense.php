@@ -43,5 +43,9 @@ class Expense extends Entity
         'modified' => true,
         'paid_by' => true,
         'expense_splits' => true,
+        'expense_category_id' => true,
+        'supplier_id' => true,
+        'is_paid' => true,
+        'paid_date' => true,
     ];
 }
