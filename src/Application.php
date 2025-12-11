@@ -30,6 +30,11 @@ use Cake\ORM\Locator\TableLocator;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
 use App\Middleware\LocaleSelectorMiddleware;
+use Authentication\AuthenticationService;
+use Authentication\AuthenticationServiceInterface;
+use Authentication\AuthenticationServiceProviderInterface;
+use Authentication\Middleware\AuthenticationMiddleware;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * Application setup class.
@@ -39,7 +44,7 @@ use App\Middleware\LocaleSelectorMiddleware;
  *
  * @extends \Cake\Http\BaseApplication<\App\Application>
  */
-class Application extends BaseApplication {
+class Application extends BaseApplication implements AuthenticationServiceProviderInterface {
     /**
      * Load all the application configuration and bootstrap logic.
      *
@@ -47,6 +52,9 @@ class Application extends BaseApplication {
      */
     public function bootstrap(): void {
         // Call parent to load bootstrap from files.
+
+        $this->addPlugin('Authentication');
+
         parent::bootstrap();
 
         if (PHP_SAPI !== 'cli') {
@@ -82,7 +90,7 @@ class Application extends BaseApplication {
             // available as array through $request->getData()
             // https://book.cakephp.org/5/en/controllers/middleware.html#body-parser-middleware
             ->add(new BodyParserMiddleware())
-
+            ->add(new AuthenticationMiddleware($this))
             // Cross Site Request Forgery (CSRF) Protection Middleware
             // https://book.cakephp.org/5/en/security/csrf.html#cross-site-request-forgery-csrf-middleware
             ->add(new CsrfProtectionMiddleware([
@@ -91,6 +99,33 @@ class Application extends BaseApplication {
             ->add(new LocaleSelectorMiddleware());
 
         return $middlewareQueue;
+    }
+
+    public function getAuthenticationService(ServerRequestInterface $request): AuthenticationServiceInterface {
+        $authenticationService = new AuthenticationService([
+            'unauthenticatedRedirect' => '/users/login',
+            'queryParam' => 'redirect',
+        ]);
+
+        // Load identifiers (how we identify users)
+        $authenticationService->loadIdentifier('Authentication.Password', [
+            'fields' => [
+                'username' => 'username',
+                'password' => 'password',
+            ]
+        ]);
+
+        // Load authenticators (how users log in)
+        $authenticationService->loadAuthenticator('Authentication.Session');
+        $authenticationService->loadAuthenticator('Authentication.Form', [
+            'fields' => [
+                'username' => 'username',
+                'password' => 'password',
+            ],
+            'loginUrl' => '/users/login',
+        ]);
+
+        return $authenticationService;
     }
 
     /**

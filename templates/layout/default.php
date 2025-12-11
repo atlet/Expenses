@@ -341,14 +341,14 @@ $cakeDescription = 'Sledilnik stroškov pisarne';
                     </li>
                     <li class="nav-item">
                         <?= $this->Html->link(
-                            '<i class="fas fa-users me-1"></i>' . __('Statistics'),
+                            '<i class="fas fa-chart-bar me-1"></i>' . __('Statistics'),
                             ['controller' => 'Statistics', 'action' => 'index'],
                             [
                                 'class' => 'nav-link' . ($this->request->getParam('controller') === 'Statistics' ? ' active' : ''),
                                 'escape' => false
                             ]
                         ) ?>
-                    </li>                    
+                    </li>
                 </ul>
 
                 <ul class="navbar-nav">
@@ -411,6 +411,68 @@ $cakeDescription = 'Sledilnik stroškov pisarne';
                                     '<i class="fas fa-repeat me-2"></i>Nov ponavljajoči strošek',
                                     ['controller' => 'RecurringExpenses', 'action' => 'add'],
                                     ['class' => 'dropdown-item', 'escape' => false]
+                                ) ?>
+                            </li>
+                            <li>
+                                <?= $this->Html->link(
+                                    '<i class="fas fa-tag me-2"></i>' . __('Category'),
+                                    ['controller' => 'ExpenseCategories', 'action' => 'add'],
+                                    ['class' => 'dropdown-item', 'escape' => false]
+                                ) ?>
+                            </li>
+                            <li>
+                                <?= $this->Html->link(
+                                    '<i class="fas fa-building me-2"></i>' . __('Supplier'),
+                                    ['controller' => 'Suppliers', 'action' => 'add'],
+                                    ['class' => 'dropdown-item', 'escape' => false]
+                                ) ?>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle me-1"></i>
+                            <?php if ($authUser): ?>
+                                <?= h($authUser->username) ?>
+                            <?php endif; ?>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li class="dropdown-header">
+                                <i class="fas fa-user me-2"></i>
+                                <?php if ($authUser): ?>
+                                    <?= h($authUser->first_name . ' ' . $authUser->last_name) ?>
+                                <?php endif; ?>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <?= $this->Html->link(
+                                    '<i class="fas fa-user-circle me-2"></i>' . __('My Profile'),
+                                    ['controller' => 'Users', 'action' => 'profile'],
+                                    ['class' => 'dropdown-item', 'escape' => false]
+                                ) ?>
+                            </li>
+                            <?php if ($authUser && $authUser->role === 'admin'): ?>
+                                <li>
+                                    <?= $this->Html->link(
+                                        '<i class="fas fa-users-cog me-2"></i>' . __('User Management'),
+                                        ['controller' => 'Users', 'action' => 'index'],
+                                        ['class' => 'dropdown-item', 'escape' => false]
+                                    ) ?>
+                                </li>
+                            <?php endif; ?>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <?= $this->Html->link(
+                                    '<i class="fas fa-sign-out-alt me-2"></i>' . __('Logout'),
+                                    ['controller' => 'Users', 'action' => 'logout'],
+                                    ['class' => 'dropdown-item text-danger', 'escape' => false]
                                 ) ?>
                             </li>
                         </ul>

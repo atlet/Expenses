@@ -71,6 +71,7 @@ class StatisticsController extends AppController {
             ->contain(['PaidBy', 'ExpenseCategories'])
             ->select($expensesTable)
             ->select(['total' => '(Expenses.amount + Expenses.commission)'])
+            ->select(['PaidBy.name'])
             ->order(['total' => 'DESC'])
             ->limit(10)
             ->toArray();
