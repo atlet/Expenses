@@ -319,6 +319,36 @@ $cakeDescription = 'Sledilnik stroškov pisarne';
                             ]
                         ) ?>
                     </li>
+                    <li class="nav-item">
+                        <?= $this->Html->link(
+                            '<i class="fas fa-users me-1"></i>' . __('Suppliers'),
+                            ['controller' => 'Suppliers', 'action' => 'index'],
+                            [
+                                'class' => 'nav-link' . ($this->request->getParam('controller') === 'Suppliers' ? ' active' : ''),
+                                'escape' => false
+                            ]
+                        ) ?>
+                    </li>
+                    <li class="nav-item">
+                        <?= $this->Html->link(
+                            '<i class="fas fa-users me-1"></i>' . __('Categories'),
+                            ['controller' => 'ExpenseCategories', 'action' => 'index'],
+                            [
+                                'class' => 'nav-link' . ($this->request->getParam('controller') === 'ExpenseCategories' ? ' active' : ''),
+                                'escape' => false
+                            ]
+                        ) ?>
+                    </li>
+                    <li class="nav-item">
+                        <?= $this->Html->link(
+                            '<i class="fas fa-users me-1"></i>' . __('Statistics'),
+                            ['controller' => 'Statistics', 'action' => 'index'],
+                            [
+                                'class' => 'nav-link' . ($this->request->getParam('controller') === 'Statistics' ? ' active' : ''),
+                                'escape' => false
+                            ]
+                        ) ?>
+                    </li>                    
                 </ul>
 
                 <ul class="navbar-nav">
