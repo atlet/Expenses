@@ -114,6 +114,15 @@
                                     <td class="text-center">
                                         <div class="btn-group" role="group">
                                             <?= $this->Html->link(
+                                                '<i class="fas fa-eye"></i>',
+                                                ['action' => 'view', $expense->id],
+                                                [
+                                                    'class' => 'btn btn-sm btn-info',
+                                                    'escape' => false,
+                                                    'title' => __('View')
+                                                ]
+                                            ) ?>
+                                            <?= $this->Html->link(
                                                 '<i class="fas fa-edit"></i>',
                                                 ['action' => 'edit', $expense->id],
                                                 [

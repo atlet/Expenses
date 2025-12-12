@@ -36,6 +36,11 @@ class ExpensesTable extends Table {
             'foreignKey' => 'supplier_id',
             'joinType' => 'LEFT',
         ]);
+
+        $this->hasMany('ExpenseAttachments', [
+            'foreignKey' => 'expense_id',
+            'dependent' => true,
+        ]);
     }
 
     public function validationDefault(Validator $validator): Validator {

@@ -16,7 +16,10 @@ class ExpensesController extends AppController {
     public function view($id = null) {
         $expense = $this->Expenses->get($id, contain: [
             'PaidBy',
-            'ExpenseSplits.People'
+            'ExpenseSplits.People',
+            'ExpenseCategories',
+            'Suppliers',
+            'ExpenseAttachments.Uploader'
         ]);
 
         $this->set(compact('expense'));
