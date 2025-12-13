@@ -1,6 +1,5 @@
 <?php
 $class = 'alert alert-dismissible fade show flash-message';
-$iconClass = 'fas fa-info-circle';
 
 if (!empty($params['class'])) {
     $class .= ' ' . $params['class'];
@@ -8,15 +7,12 @@ if (!empty($params['class'])) {
     switch ($key) {
         case 'success':
             $class .= ' alert-success';
-            $iconClass = 'fas fa-check-circle';
             break;
         case 'error':
             $class .= ' alert-danger';
-            $iconClass = 'fas fa-exclamation-circle';
             break;
         case 'warning':
             $class .= ' alert-warning';
-            $iconClass = 'fas fa-exclamation-triangle';
             break;
         case 'info':
         default:
@@ -26,7 +22,29 @@ if (!empty($params['class'])) {
 }
 ?>
 <div class="<?= h($class) ?>" role="alert">
-    <i class="<?= $iconClass ?> me-2"></i>
-    <?= h($message) ?>
+    <div class="d-flex">
+        <div>
+            <?php
+            $icon = 'ti ti-info-circle';
+            if (isset($key)) {
+                switch ($key) {
+                    case 'success':
+                        $icon = 'ti ti-check';
+                        break;
+                    case 'error':
+                        $icon = 'ti ti-alert-circle';
+                        break;
+                    case 'warning':
+                        $icon = 'ti ti-alert-triangle';
+                        break;
+                }
+            }
+            ?>
+            <i class="<?= $icon ?> icon alert-icon"></i>
+        </div>
+        <div>
+            <?= h($message) ?>
+        </div>
+    </div>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
