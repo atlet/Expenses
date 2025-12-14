@@ -68,37 +68,6 @@
 </head>
 
 <body class="d-flex flex-column">
-    <!-- Language Switcher -->
-    <div class="language-switcher">
-        <div class="dropdown">
-            <button class="btn btn-ghost-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <?php
-                $currentLocale = \Cake\I18n\I18n::getLocale();
-                if ($currentLocale === 'sl_SI') {
-                    echo '🇸🇮 SLO';
-                } else {
-                    echo '🇬🇧 ENG';
-                }
-                ?>
-            </button>
-            <ul class="dropdown-menu dropdown-menu-end">
-                <li>
-                    <?= $this->Html->link(
-                        '🇬🇧 English',
-                        ['controller' => 'Language', 'action' => 'switch', '?' => ['locale' => 'en_US']],
-                        ['class' => 'dropdown-item']
-                    ) ?>
-                </li>
-                <li>
-                    <?= $this->Html->link(
-                        '🇸🇮 Slovenščina',
-                        ['controller' => 'Language', 'action' => 'switch', '?' => ['locale' => 'sl_SI']],
-                        ['class' => 'dropdown-item']
-                    ) ?>
-                </li>
-            </ul>
-        </div>
-    </div>
 
     <div class="page page-center">
         <div class="container container-tight py-4">
@@ -108,66 +77,24 @@
                         <i class="ti ti-receipt"></i>
                     </div>
                     <h1 class="h2 mb-3"><?= __('Expense Tracker') ?></h1>
-                    <p class="text-muted"><?= __('Sign in to your account to continue') ?></p>
                 </div>
 
-                <div class="card card-login card-md">
+                <div class="card card-md">
                     <div class="card-body">
+                        <h2 class="h2 text-center mb-4"><?= __('Sign in to your account to continue') ?></h2>
                         <?= $this->Flash->render() ?>
 
                         <?= $this->Form->create(null, ['class' => 'login-form']) ?>
 
-                        <div class="mb-3">
-                            <label class="form-label"><?= __('Username') ?></label>
-                            <div class="input-group input-group-flat">
-                                <span class="input-group-text">
-                                    <i class="ti ti-user"></i>
-                                </span>
-                                <?= $this->Form->control('username', [
-                                    'label' => false,
-                                    'class' => 'form-control',
-                                    'placeholder' => __('Enter your username'),
-                                    'required' => true,
-                                    'autofocus' => true,
-                                    'autocomplete' => 'username'
-                                ]) ?>
-                            </div>
-                        </div>
+                        <?= $this->Form->control('username', ['placeholder' => __('your@email.com'), 'label' => __('Username')]) ?>
+                        <?= $this->Form->control('password', ['placeholder' => __('Your password'), 'label' => __('Password')]) ?>
+                        <?= $this->Form->control('remember', ['type' => 'checkbox', 'label' => __('Remember me on this device')]) ?>
 
-                        <div class="mb-3">
-                            <label class="form-label"><?= __('Password') ?></label>
-                            <div class="input-group input-group-flat">
-                                <span class="input-group-text">
-                                    <i class="ti ti-lock"></i>
-                                </span>
-                                <?= $this->Form->control('password', [
-                                    'label' => false,
-                                    'type' => 'password',
-                                    'class' => 'form-control',
-                                    'placeholder' => __('Enter your password'),
-                                    'required' => true,
-                                    'autocomplete' => 'current-password'
-                                ]) ?>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-check">
-                                <input type="checkbox" class="form-check-input" name="remember" />
-                                <span class="form-check-label"><?= __('Remember me on this device') ?></span>
-                            </label>
-                        </div>
-
-                        <div class="form-footer">
-                            <?= $this->Form->button(
-                                '<i class="ti ti-login me-2"></i>' . __('Sign in'),
-                                [
-                                    'class' => 'btn btn-primary w-100',
-                                    'escape' => false,
-                                    'escapeTitle' => false
-                                ]
-                            ) ?>
-                        </div>
+                        <?= $this->Form->button('<i class="ti ti-login me-2"></i>' . 'Sign in', [
+                            'class' => 'btn btn-primary w-100',
+                            'escape' => false,
+                            'escapeTitle' => false
+                        ]) ?>
 
                         <?= $this->Form->end() ?>
                     </div>

@@ -1,0 +1,212 @@
+:root {
+    --tblr-primary: #206bc4;
+    --tblr-secondary: #626976;
+    --tblr-success: #2fb344;
+    --tblr-info: #4299e1;
+    --tblr-warning: #f76707;
+    --tblr-danger: #d63939;
+}
+
+body {
+    background-color: #f4f6fa;
+}
+
+/* Navbar fixes */
+.navbar-brand-image {
+    height: 2rem;
+}
+
+.navbar {
+    background-color: #fff;
+    border-bottom: 1px solid rgba(98, 105, 118, 0.16);
+}
+
+/* Sidebar */
+.navbar-vertical.navbar-expand-md {
+    width: 15rem;
+    position: fixed;
+    top: 3.5rem;
+    left: 0;
+    bottom: 0;
+    z-index: 1030;
+    overflow-y: auto;
+    background-color: #fff;
+}
+
+@media (max-width: 767.98px) {
+    .navbar-vertical.navbar-expand-md {
+        width: 100%;
+        position: fixed;
+        top: 3.5rem;
+        left: -100%;
+        transition: left 0.3s ease;
+        z-index: 1040;
+    }
+
+    .navbar-vertical.navbar-expand-md.show {
+        left: 0;
+    }
+}
+
+/* Main content area */
+.page-wrapper {
+    min-height: 100vh;
+}
+
+@media (max-width: 767.98px) {
+    .page-wrapper {
+        padding-left: 0;
+    }
+}
+
+.page-body {
+    /*padding: 1.5rem 0;*/
+    margin-top: 0;
+}
+
+/* Remove extra padding from container */
+.page-body>.container-fluid {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+/* Navigation */
+.nav-link-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.5rem;
+}
+
+.nav-link.active {
+    background-color: rgba(32, 107, 196, 0.06);
+    color: var(--tblr-primary);
+    font-weight: 600;
+}
+
+/* Dropdown improvements */
+.dropdown-item-icon {
+    width: 1.25rem;
+    display: inline-block;
+    text-align: center;
+    margin-right: 0.5rem;
+}
+
+.dropdown-menu-arrow::before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    right: 12px;
+    width: 12px;
+    height: 12px;
+    background: white;
+    border-left: 1px solid rgba(98, 105, 118, 0.16);
+    border-top: 1px solid rgba(98, 105, 118, 0.16);
+    transform: rotate(45deg);
+}
+
+/* Avatar improvements */
+.avatar-title {
+    font-size: 1.25rem;
+}
+
+/* Language dropdown spacing */
+.navbar-nav .nav-item.me-3 {
+    margin-right: 1rem !important;
+}
+
+/* Card improvements */
+.card {
+    /*border: none;*/
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
+    /*margin-bottom: 1.5rem;*/
+}
+
+/* Flash messages */
+.flash-message {
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    z-index: 9999;
+    min-width: 300px;
+    max-width: 500px;
+    animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Footer */
+footer.footer {
+    padding: 1.5rem 0;
+    border-top: 1px solid rgba(98, 105, 118, 0.16);
+    background-color: #fff;
+}
+
+@media (max-width: 767.98px) {
+    footer.footer {
+        margin-left: 0;
+    }
+}
+
+/* Mobile menu toggle */
+.navbar-toggler {
+    border: none;
+    padding: 0.25rem 0.5rem;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+/* Backdrop for mobile menu */
+.navbar-backdrop {
+    display: none;
+    position: fixed;
+    top: 3.5rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1035;
+}
+
+.navbar-backdrop.show {
+    display: block;
+}
+
+/* Custom scrollbar for sidebar */
+.navbar-vertical::-webkit-scrollbar {
+    width: 6px;
+}
+
+.navbar-vertical::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.navbar-vertical::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+.navbar-vertical::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Ensure proper spacing for page content */
+.page-content {
+    padding: 0;
+}
+
+/* Badge improvements */
+.badge {
+    font-weight: 500;
+}

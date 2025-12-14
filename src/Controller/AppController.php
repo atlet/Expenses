@@ -44,8 +44,6 @@ class AppController extends Controller {
         $this->loadComponent('Flash');
         $this->loadComponent('Authentication.Authentication');
 
-        $this->viewBuilder()->setLayout('tabler');
-
         /*
          * Enable the following component for recommended CakePHP form protection settings.
          * see https://book.cakephp.org/5/en/controllers/components/form-protection.html
@@ -59,5 +57,19 @@ class AppController extends Controller {
         // Pass user data to all views
         $user = $this->Authentication->getIdentity();
         $this->set('authUser', $user);
+    }
+
+    public function beforeRender(\Cake\Event\EventInterface $event) {
+        parent::beforeRender($event);
+
+        // Authentication plugin: identiteta je null, če ni prijavljen
+        $identity = $this->request->getAttribute('identity');
+
+        if ($identity === null) {
+            // layout za goste
+            $this->viewBuilder()->setLayout('empty');
+        } else {
+            $this->viewBuilder()->setLayout('tabler');
+        }
     }
 }
