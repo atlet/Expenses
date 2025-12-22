@@ -3,12 +3,12 @@
         <h1><i class="fas fa-user me-2"></i><?= h($person->name) ?></h1>
         <div>
             <?= $this->Html->link(
-                '<i class="fas fa-edit me-2"></i>Uredi',
+                '<i class="fas fa-edit me-2"></i>' . __('Edit'),
                 ['action' => 'edit', $person->id],
                 ['class' => 'btn btn-warning', 'escape' => false]
             ) ?>
             <?= $this->Html->link(
-                '<i class="fas fa-arrow-left me-2"></i>Nazaj',
+                '<i class="fas fa-arrow-left me-2"></i>' . __('Back'),
                 ['action' => 'index'],
                 ['class' => 'btn btn-secondary', 'escape' => false]
             ) ?>
@@ -19,7 +19,7 @@
         <div class="col-md-4 mb-4">
             <div class="card">
                 <div class="card-header bg-info text-white">
-                    <h5 class="mb-0"><i class="fas fa-user-circle me-2"></i>Osnovni podatki</h5>
+                    <h5 class="mb-0"><i class="fas fa-user-circle me-2"></i><?= __('Basic Information') ?></h5>
                 </div>
                 <div class="card-body text-center">
                     <i class="fas fa-user-circle fa-5x text-info mb-3"></i>
@@ -35,15 +35,15 @@
                     <div class="row text-center">
                         <div class="col-4">
                             <h3 class="text-primary"><?= count($person->expenses) ?></h3>
-                            <small class="text-muted">Plačanih stroškov</small>
+                            <small class="text-muted"><?= __('Paid expenses') ?></small>
                         </div>
                         <div class="col-4">
                             <h3 class="text-success"><?= count($person->payments_from) ?></h3>
-                            <small class="text-muted">Opravljenih plačil</small>
+                            <small class="text-muted"><?= __('Completed payments') ?></small>
                         </div>
                         <div class="col-4">
                             <h3 class="text-warning"><?= count($person->expense_splits) ?></h3>
-                            <small class="text-muted">Deljenih stroškov</small>
+                            <small class="text-muted"><?= __('Paid expenses') ?></small>
                         </div>
                     </div>
                 </div>
@@ -53,19 +53,19 @@
         <div class="col-md-8">
             <div class="card mb-4">
                 <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0"><i class="fas fa-file-invoice-dollar me-2"></i>Zadnji plačani stroški</h5>
+                    <h5 class="mb-0"><i class="fas fa-file-invoice-dollar me-2"></i><?= __('Last Paid Expenses') ?></h5>
                 </div>
                 <div class="card-body">
                     <?php if (empty($person->expenses)): ?>
-                        <p class="text-muted text-center py-3">Še ni plačanih stroškov</p>
+                        <p class="text-muted text-center py-3"><?= __('No expenses paid yet') ?></p>
                     <?php else: ?>
                         <div class="table-responsive">
                             <table class="table table-sm">
                                 <thead>
                                     <tr>
-                                        <th>Datum</th>
-                                        <th>Naziv</th>
-                                        <th class="text-end">Znesek</th>
+                                        <th><?= __('Date') ?></th>
+                                        <th><?= __('Title') ?></th>
+                                        <th class="text-end"><?= __('Amount') ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -85,19 +85,19 @@
 
             <div class="card">
                 <div class="card-header bg-success text-white">
-                    <h5 class="mb-0"><i class="fas fa-money-bill-transfer me-2"></i>Zadnja plačila</h5>
+                    <h5 class="mb-0"><i class="fas fa-money-bill-transfer me-2"></i><?= __('Last Payments') ?></h5>
                 </div>
                 <div class="card-body">
                     <?php if (empty($person->payments_from)): ?>
-                        <p class="text-muted text-center py-3">Še ni opravljenih plačil</p>
+                        <p class="text-muted text-center py-3"><?= __('No payments completed yet') ?></p>
                     <?php else: ?>
                         <div class="table-responsive">
                             <table class="table table-sm">
                                 <thead>
                                     <tr>
-                                        <th>Datum</th>
-                                        <th>Prejemnik</th>
-                                        <th class="text-end">Znesek</th>
+                                        <th><?= __('Date') ?></th>
+                                        <th><?= __('Recipient') ?></th>
+                                        <th class="text-end"><?= __('Amount') ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>

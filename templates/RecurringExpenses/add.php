@@ -1,5 +1,5 @@
 <div class="container mt-4">
-    <h1 class="mb-4">Nov ponavljajoči se strošek</h1>
+    <h1 class="mb-4"><?= __('New Recurring Expense') ?></h1>
 
     <div class="card">
         <div class="card-body">
@@ -8,16 +8,16 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <?= $this->Form->control('title', [
-                        'label' => 'Naziv (npr. Internet)',
+                        'label' => __('Title (e.g. Internet)'),
                         'class' => 'form-control'
                     ]) ?>
                 </div>
 
                 <div class="col-md-6 mb-3">
                     <?= $this->Form->control('day_of_month', [
-                        'label' => 'Dan v mesecu',
+                        'label' => __('Day of the month to repeat the expense'),
                         'class' => 'form-select',
-                        'options' => array_combine(range(1, 28), array_map(fn($n) => "{$n}. dan", range(1, 28)))
+                        'options' => array_combine(range(1, 31), array_map(fn($n) => "{$n}. " . __('day'), range(1, 31)))
                     ]) ?>
                 </div>
             </div>
@@ -25,7 +25,7 @@
             <div class="row">
                 <div class="col-md-4 mb-3">
                     <?= $this->Form->control('amount', [
-                        'label' => 'Znesek (€)',
+                        'label' => __('Amount (€)'),
                         'class' => 'form-control',
                         'type' => 'number',
                         'step' => '0.01'
@@ -34,7 +34,7 @@
 
                 <div class="col-md-4 mb-3">
                     <?= $this->Form->control('commission', [
-                        'label' => 'Provizija (€)',
+                        'label' => __('Commission (€)'),
                         'class' => 'form-control',
                         'type' => 'number',
                         'step' => '0.01',
@@ -44,16 +44,16 @@
 
                 <div class="col-md-4 mb-3">
                     <?= $this->Form->control('paid_by_id', [
-                        'label' => 'Plača',
+                        'label' => __('Paid by'),
                         'class' => 'form-select',
                         'options' => $people,
-                        'empty' => 'Izberite osebo'
+                        'empty' => __('Select person')
                     ]) ?>
                 </div>
             </div>
 
             <div class="mb-3">
-                <label class="form-label fw-bold">Deli med:</label>
+                <label class="form-label fw-bold"><?= __('Split Between:') ?></label>
                 <div class="row">
                     <?php foreach ($people as $id => $name): ?>
                         <div class="col-md-4">
@@ -74,8 +74,8 @@
             </div>
 
             <div class="d-flex gap-2">
-                <?= $this->Form->button('Shrani', ['class' => 'btn btn-warning']) ?>
-                <?= $this->Html->link('Prekliči', ['action' => 'index'], ['class' => 'btn btn-secondary']) ?>
+                <?= $this->Form->button(__('Save'), ['class' => 'btn btn-warning']) ?>
+                <?= $this->Html->link(__('Cancel'), ['action' => 'index'], ['class' => 'btn btn-secondary']) ?>
             </div>
 
             <?= $this->Form->end() ?>

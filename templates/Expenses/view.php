@@ -54,10 +54,7 @@
                             <strong><i class="fas fa-tag me-2"></i><?= __('Category') ?>:</strong><br>
                             <span class="badge" style="background-color: <?= h($expense->expense_category->color) ?>; font-size: 1rem;">
                                 <i class="fas <?= h($expense->expense_category->icon) ?> me-1"></i>
-                                <?php
-                                $locale = \Cake\I18n\I18n::getLocale();
-                                echo $locale === 'en_US' ? h($expense->expense_category->name_en) : h($expense->expense_category->name);
-                                ?>
+                                <?= h($expense->expense_category->name) ?>
                             </span>
                         </div>
                     <?php endif; ?>

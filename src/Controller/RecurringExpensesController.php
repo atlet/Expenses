@@ -63,10 +63,10 @@ class RecurringExpensesController extends AppController {
             ]);
 
             if ($this->RecurringExpenses->save($recurringExpense)) {
-                $this->Flash->success(__('Ponavljajoči se strošek je bil dodan.'));
+                $this->Flash->success(__('A recurring cost has been added.'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Ponavljajočega se stroška ni bilo mogoče dodati. Prosim poskusite ponovno.'));            
+            $this->Flash->error(__('A recurring cost could not be added. Please try again.'));            
         }
 
         $people = $this->RecurringExpenses->PaidBy->find('list');
@@ -110,9 +110,9 @@ class RecurringExpensesController extends AppController {
             $recurringExpense->last_added_date = FrozenDate::now();
             $this->RecurringExpenses->save($recurringExpense);
 
-            $this->Flash->success(__('Strošek je bil dodan iz ponavljajočega se stroška.'));
+            $this->Flash->success(__('The expense has been added from the recurring expense.'));
         } else {
-            $this->Flash->error(__('Stroška ni bilo mogoče dodati. Prosim poskusite ponovno.'));
+            $this->Flash->error(__('The expense could not be added. Please try again.'));
         }
 
         return $this->redirect(['action' => 'index']);
@@ -122,9 +122,9 @@ class RecurringExpensesController extends AppController {
         $this->request->allowMethod(['post', 'delete']);
         $recurringExpense = $this->RecurringExpenses->get($id);
         if ($this->RecurringExpenses->delete($recurringExpense)) {
-            $this->Flash->success(__('Ponavljajoči se strošek je bil izbrisan.'));
+            $this->Flash->success(__('The recurring expense has been deleted.'));
         } else {
-            $this->Flash->error(__('Ponavljajočega se stroška ni bilo mogoče izbrisati. Prosim poskusite ponovno.'));
+            $this->Flash->error(__('The recurring expense could not be deleted. Please try again.'));
         }
         return $this->redirect(['action' => 'index']);
     }

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2025-12-10 10:09+0000\n"
+"POT-Creation-Date: 2025-12-22 10:10+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -13,6 +13,71 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: ./src/Controller/ExpenseAttachmentsController.php:18
+msgid "Expense not found"
+msgstr ""
+
+#: ./src/Controller/ExpenseAttachmentsController.php:24
+msgid "No files were uploaded"
+msgstr ""
+
+#: ./src/Controller/ExpenseAttachmentsController.php:38
+msgid "Upload error"
+msgstr ""
+
+#: ./src/Controller/ExpenseAttachmentsController.php:58
+msgid "File type not allowed"
+msgstr ""
+
+#: ./src/Controller/ExpenseAttachmentsController.php:64
+msgid "File too large (max 10MB)"
+msgstr ""
+
+#: ./src/Controller/ExpenseAttachmentsController.php:100
+msgid "Database save failed"
+msgstr ""
+
+#: ./src/Controller/ExpenseAttachmentsController.php:109
+msgid "Successfully uploaded {0} file(s)"
+msgstr ""
+
+#: ./src/Controller/ExpenseAttachmentsController.php:128
+#: ./src/Controller/ExpenseAttachmentsController.php:147
+msgid "File not found"
+msgstr ""
+
+#: ./src/Controller/ExpenseAttachmentsController.php:175
+msgid "The attachment has been deleted."
+msgstr ""
+
+#: ./src/Controller/ExpenseAttachmentsController.php:177
+msgid "The attachment could not be deleted."
+msgstr ""
+
+#: ./src/Controller/ExpenseCategoriesController.php:20
+msgid "The category has been saved."
+msgstr ""
+
+#: ./src/Controller/ExpenseCategoriesController.php:23
+msgid "The category could not be saved. Please try again."
+msgstr ""
+
+#: ./src/Controller/ExpenseCategoriesController.php:33
+msgid "The category has been updated."
+msgstr ""
+
+#: ./src/Controller/ExpenseCategoriesController.php:36
+msgid "The category could not be updated. Please try again."
+msgstr ""
+
+#: ./src/Controller/ExpenseCategoriesController.php:45
+msgid "The category has been deleted."
+msgstr ""
+
+#: ./src/Controller/ExpenseCategoriesController.php:47
+msgid "The category could not be deleted. Please try again."
+msgstr ""
 
 #: ./src/Controller/ExpenseSplitsController.php:51
 #: ./src/Controller/ExpenseSplitsController.php:75
@@ -32,69 +97,68 @@ msgstr ""
 msgid "The expense split could not be deleted. Please, try again."
 msgstr ""
 
-#: ./src/Controller/ExpensesController.php:49
-msgid "Strošek je bil dodan."
+#: ./src/Controller/ExpensesController.php:57
+msgid "The expense has been saved."
 msgstr ""
 
-#: ./src/Controller/ExpensesController.php:52
-#: ./src/Controller/RecurringExpensesController.php:115
-msgid "Stroška ni bilo mogoče dodati. Prosim poskusite ponovno."
+#: ./src/Controller/ExpensesController.php:60
+msgid "The expense could not be saved. Please try again."
 msgstr ""
 
-#: ./src/Controller/ExpensesController.php:86
-msgid "Strošek je bil posodobljen."
-msgstr ""
-
-#: ./src/Controller/ExpensesController.php:89
-msgid "Stroška ni bilo mogoče posodobiti. Prosim poskusite ponovno."
+#: ./src/Controller/ExpensesController.php:102
+msgid "The expense has been updated."
 msgstr ""
 
 #: ./src/Controller/ExpensesController.php:105
+msgid "The expense could not be updated. Please try again."
+msgstr ""
+
+#: ./src/Controller/ExpensesController.php:124
 msgid "Strošek je bil izbrisan."
 msgstr ""
 
-#: ./src/Controller/ExpensesController.php:107
+#: ./src/Controller/ExpensesController.php:126
 msgid "Stroška ni bilo mogoče izbrisati. Prosim poskusite ponovno."
 msgstr ""
 
-#: ./src/Controller/PaymentsController.php:23
-msgid "Plačilo je bilo dodano."
+#: ./src/Controller/PaymentsController.php:21
+msgid "Payment has been added."
 msgstr ""
 
-#: ./src/Controller/PaymentsController.php:26
-msgid "Plačila ni bilo mogoče dodati. Prosim poskusite ponovno."
+#: ./src/Controller/PaymentsController.php:24
+msgid "Payment could not be added. Please try again."
 msgstr ""
 
-#: ./src/Controller/PaymentsController.php:38
-msgid "Plačilo je bilo izbrisano."
+#: ./src/Controller/PaymentsController.php:35
+msgid "Payment has been deleted."
 msgstr ""
 
-#: ./src/Controller/PaymentsController.php:40
-msgid "Plačila ni bilo mogoče izbrisati. Prosim poskusite ponovno."
+#: ./src/Controller/PaymentsController.php:37
+msgid "Payment could not be deleted. Please try again."
 msgstr ""
 
 #: ./src/Controller/PeopleController.php:35
-msgid "Oseba je bila dodana."
+msgid "The person has been added."
 msgstr ""
 
 #: ./src/Controller/PeopleController.php:38
-msgid "Osebe ni bilo mogoče dodati. Prosim poskusite ponovno."
+msgid "The person could not be added. Please try again."
 msgstr ""
 
 #: ./src/Controller/PeopleController.php:48
-msgid "Oseba je bila posodobljena."
+msgid "The person has been updated."
 msgstr ""
 
 #: ./src/Controller/PeopleController.php:51
-msgid "Osebe ni bilo mogoče posodobiti. Prosim poskusite ponovno."
+msgid "The person could not be updated. Please try again."
 msgstr ""
 
 #: ./src/Controller/PeopleController.php:60
-msgid "Oseba je bila izbrisana."
+msgid "The person has been deleted."
 msgstr ""
 
 #: ./src/Controller/PeopleController.php:62
-msgid "Osebe ni bilo mogoče izbrisati. Prosim poskusite ponovno."
+msgid "The person could not be deleted. Please try again."
 msgstr ""
 
 #: ./src/Controller/RecurringExpenseSplitsController.php:51
@@ -116,26 +180,105 @@ msgid "The recurring expense split could not be deleted. Please, try again."
 msgstr ""
 
 #: ./src/Controller/RecurringExpensesController.php:66
-msgid "Ponavljajoči se strošek je bil dodan."
+msgid "A recurring cost has been added."
 msgstr ""
 
 #: ./src/Controller/RecurringExpensesController.php:69
-msgid "Ponavljajočega se stroška ni bilo mogoče dodati. Prosim poskusite ponovno."
+msgid "A recurring cost could not be added. Please try again."
 msgstr ""
 
 #: ./src/Controller/RecurringExpensesController.php:113
-msgid "Strošek je bil dodan iz ponavljajočega se stroška."
+msgid "The expense has been added from the recurring expense."
+msgstr ""
+
+#: ./src/Controller/RecurringExpensesController.php:115
+msgid "The expense could not be added. Please try again."
 msgstr ""
 
 #: ./src/Controller/RecurringExpensesController.php:125
-msgid "Ponavljajoči se strošek je bil izbrisan."
+msgid "The recurring expense has been deleted."
 msgstr ""
 
 #: ./src/Controller/RecurringExpensesController.php:127
-msgid "Ponavljajočega se stroška ni bilo mogoče izbrisati. Prosim poskusite ponovno."
+msgid "The recurring expense could not be deleted. Please try again."
+msgstr ""
+
+#: ./src/Controller/SuppliersController.php:21
+msgid "The supplier has been saved."
+msgstr ""
+
+#: ./src/Controller/SuppliersController.php:24
+msgid "The supplier could not be saved. Please try again."
+msgstr ""
+
+#: ./src/Controller/SuppliersController.php:34
+msgid "The supplier has been updated."
+msgstr ""
+
+#: ./src/Controller/SuppliersController.php:37
+msgid "The supplier could not be updated. Please try again."
+msgstr ""
+
+#: ./src/Controller/SuppliersController.php:46
+msgid "The supplier has been deleted."
+msgstr ""
+
+#: ./src/Controller/SuppliersController.php:48
+msgid "The supplier could not be deleted. Please try again."
+msgstr ""
+
+#: ./src/Controller/UsersController.php:38
+msgid "Invalid username or password"
+msgstr ""
+
+#: ./src/Controller/UsersController.php:47
+msgid "You have been logged out."
+msgstr ""
+
+#: ./src/Controller/UsersController.php:69
+msgid "The user has been created."
+msgstr ""
+
+#: ./src/Controller/UsersController.php:72
+msgid "The user could not be saved. Please try again."
+msgstr ""
+
+#: ./src/Controller/UsersController.php:85
+msgid "The user has been updated."
+msgstr ""
+
+#: ./src/Controller/UsersController.php:88
+msgid "The user could not be updated. Please try again."
+msgstr ""
+
+#: ./src/Controller/UsersController.php:103
+msgid "You cannot delete your own account."
+msgstr ""
+
+#: ./src/Controller/UsersController.php:108
+msgid "The user has been deleted."
+msgstr ""
+
+#: ./src/Controller/UsersController.php:110
+msgid "The user could not be deleted. Please try again."
+msgstr ""
+
+#: ./src/Controller/UsersController.php:129
+msgid "Your profile has been updated."
+msgstr ""
+
+#: ./src/Controller/UsersController.php:132
+msgid "Your profile could not be updated. Please try again."
+msgstr ""
+
+#: ./src/Controller/UsersController.php:141
+msgid "You do not have permission to access this page."
 msgstr ""
 
 #: ./templates/Dashboard/index.php:2
+#: ./templates/layout/default.php:274
+#: ./templates/layout/default.php:506
+#: ./templates/layout/tabler.php:132
 msgid "Dashboard"
 msgstr ""
 
@@ -144,6 +287,10 @@ msgid "Total balance"
 msgstr ""
 
 #: ./templates/Dashboard/index.php:16
+#: ./templates/Expenses/index.php:102
+#: ./templates/Expenses/view.php:37
+#: ./templates/Expenses/view.php:257
+#: ./templates/Statistics/index.php:31
 msgid "Paid"
 msgstr ""
 
@@ -187,18 +334,178 @@ msgstr ""
 msgid "Recurring expenses"
 msgstr ""
 
+#: ./templates/ExpenseCategories/add.php:3
+#: ./templates/ExpenseCategories/index.php:5
+msgid "New Category"
+msgstr ""
+
+#: ./templates/ExpenseCategories/add.php:5
+#: ./templates/ExpenseCategories/edit.php:5
+#: ./templates/Expenses/add.php:5
+#: ./templates/Expenses/edit.php:5
+#: ./templates/Expenses/view.php:13
+#: ./templates/People/add.php:5
+#: ./templates/People/edit.php:5
+#: ./templates/People/view.php:11
+#: ./templates/Suppliers/add.php:5
+#: ./templates/Suppliers/edit.php:5
+#: ./templates/Users/add.php:5
+#: ./templates/Users/edit.php:5
+#: ./templates/layout/error.php:36
+msgid "Back"
+msgstr ""
+
+#: ./templates/ExpenseCategories/add.php:21
+#: ./templates/ExpenseCategories/edit.php:22
+#: ./templates/Suppliers/index.php:28
+#: ./templates/Users/index.php:29
+msgid "Name"
+msgstr ""
+
+#: ./templates/ExpenseCategories/add.php:26
+msgid "e.g., Internet"
+msgstr ""
+
+#: ./templates/ExpenseCategories/add.php:35
+#: ./templates/ExpenseCategories/edit.php:35
+msgid "Description"
+msgstr ""
+
+#: ./templates/ExpenseCategories/add.php:42
+msgid "Brief description of this category"
+msgstr ""
+
+#: ./templates/ExpenseCategories/add.php:50
+#: ./templates/ExpenseCategories/edit.php:49
+msgid "Color"
+msgstr ""
+
+#: ./templates/ExpenseCategories/add.php:58
+msgid "Pick a color to identify this category"
+msgstr ""
+
+#: ./templates/ExpenseCategories/add.php:64
+#: ./templates/ExpenseCategories/edit.php:61
+msgid "Icon"
+msgstr ""
+
+#: ./templates/ExpenseCategories/add.php:73
+#: ./templates/ExpenseCategories/edit.php:69
+msgid "Font Awesome icon"
+msgstr ""
+
+#: ./templates/ExpenseCategories/add.php:83
+#: ./templates/ExpenseCategories/edit.php:79
+msgid "Sort Order"
+msgstr ""
+
+#: ./templates/ExpenseCategories/add.php:91
+msgid "Lower numbers appear first"
+msgstr ""
+
+#: ./templates/ExpenseCategories/add.php:104
+#: ./templates/ExpenseCategories/edit.php:97
+#: ./templates/Suppliers/add.php:126
+#: ./templates/Suppliers/edit.php:126
+#: ./templates/Suppliers/index.php:69
+#: ./templates/Users/add.php:144
+#: ./templates/Users/edit.php:134
+#: ./templates/Users/index.php:77
+msgid "Active"
+msgstr ""
+
+#: ./templates/ExpenseCategories/add.php:113
+#: ./templates/ExpenseCategories/edit.php:106
+#: ./templates/Expenses/add.php:213
+#: ./templates/Expenses/edit.php:213
+#: ./templates/Payments/add.php:58
+#: ./templates/People/add.php:57
+#: ./templates/People/edit.php:57
+#: ./templates/RecurringExpenses/add.php:78
+#: ./templates/Suppliers/add.php:135
+#: ./templates/Suppliers/edit.php:135
+#: ./templates/Users/add.php:157
+#: ./templates/Users/edit.php:150
+msgid "Cancel"
+msgstr ""
+
+#: ./templates/ExpenseCategories/add.php:118
+msgid "Save Category"
+msgstr ""
+
+#: ./templates/ExpenseCategories/edit.php:3
+msgid "Edit Category"
+msgstr ""
+
+#: ./templates/ExpenseCategories/edit.php:111
+msgid "Update Category"
+msgstr ""
+
+#: ./templates/ExpenseCategories/index.php:3
+#: ./templates/layout/default.php:334
+#: ./templates/layout/tabler.php:156
+msgid "Categories"
+msgstr ""
+
+#: ./templates/ExpenseCategories/index.php:14
+msgid "No categories yet"
+msgstr ""
+
+#: ./templates/ExpenseCategories/index.php:15
+msgid "Create categories to organize your expenses"
+msgstr ""
+
+#: ./templates/ExpenseCategories/index.php:17
+msgid "Add First Category"
+msgstr ""
+
+#: ./templates/ExpenseCategories/index.php:44
+msgid "Order"
+msgstr ""
+
+#: ./templates/ExpenseCategories/index.php:62
+#: ./templates/ExpenseSplits/index.php:32
+#: ./templates/Expenses/index.php:127
+#: ./templates/Expenses/view.php:8
+#: ./templates/People/index.php:63
+#: ./templates/People/view.php:6
+#: ./templates/RecurringExpenseSplits/index.php:30
+#: ./templates/Suppliers/index.php:85
+#: ./templates/Users/index.php:93
+msgid "Edit"
+msgstr ""
+
+#: ./templates/ExpenseCategories/index.php:67
+#: ./templates/ExpenseSplits/edit.php:14
+#: ./templates/ExpenseSplits/index.php:34
+#: ./templates/Expenses/index.php:137
+#: ./templates/Expenses/view.php:187
+#: ./templates/Payments/index.php:38
+#: ./templates/People/index.php:82
+#: ./templates/RecurringExpenseSplits/edit.php:14
+#: ./templates/RecurringExpenseSplits/index.php:32
+#: ./templates/RecurringExpenses/index.php:77
+#: ./templates/Suppliers/index.php:95
+#: ./templates/Users/index.php:104
+msgid "Delete"
+msgstr ""
+
+#: ./templates/ExpenseCategories/index.php:70
+msgid "Are you sure you want to delete this category?"
+msgstr ""
+
 #: ./templates/ExpenseSplits/add.php:12
 #: ./templates/ExpenseSplits/edit.php:12
 #: ./templates/ExpenseSplits/index.php:19
 #: ./templates/ExpenseSplits/view.php:10
-#: ./templates/Expenses/view.php:10
-#: ./templates/Expenses/view.php:71
-#: ./templates/Payments/edit.php:12
-#: ./templates/Payments/view.php:10
+#: ./templates/Expenses/index.php:38
+#: ./templates/Payments/index.php:23
 #: ./templates/RecurringExpenseSplits/add.php:12
 #: ./templates/RecurringExpenseSplits/edit.php:12
 #: ./templates/RecurringExpenseSplits/index.php:18
 #: ./templates/RecurringExpenseSplits/view.php:10
+#: ./templates/Suppliers/index.php:34
+#: ./templates/Users/index.php:34
 msgid "Actions"
 msgstr ""
 
@@ -214,28 +521,14 @@ msgstr ""
 
 #: ./templates/ExpenseSplits/add.php:27
 #: ./templates/ExpenseSplits/edit.php:32
-#: ./templates/Payments/edit.php:34
 #: ./templates/RecurringExpenseSplits/add.php:26
 #: ./templates/RecurringExpenseSplits/edit.php:31
 msgid "Submit"
 msgstr ""
 
-#: ./templates/ExpenseSplits/edit.php:14
-#: ./templates/ExpenseSplits/index.php:34
-#: ./templates/Expenses/view.php:84
-#: ./templates/Payments/edit.php:14
-#: ./templates/RecurringExpenseSplits/edit.php:14
-#: ./templates/RecurringExpenseSplits/index.php:32
-msgid "Delete"
-msgstr ""
-
 #: ./templates/ExpenseSplits/edit.php:16
 #: ./templates/ExpenseSplits/index.php:38
 #: ./templates/ExpenseSplits/view.php:12
-#: ./templates/Expenses/view.php:12
-#: ./templates/Expenses/view.php:88
-#: ./templates/Payments/edit.php:16
-#: ./templates/Payments/view.php:12
 #: ./templates/RecurringExpenseSplits/edit.php:16
 #: ./templates/RecurringExpenseSplits/index.php:36
 #: ./templates/RecurringExpenseSplits/view.php:12
@@ -257,15 +550,11 @@ msgid "Expense Splits"
 msgstr ""
 
 #: ./templates/ExpenseSplits/index.php:31
-#: ./templates/Expenses/view.php:81
+#: ./templates/Expenses/index.php:118
+#: ./templates/Expenses/view.php:166
+#: ./templates/People/index.php:72
 #: ./templates/RecurringExpenseSplits/index.php:29
 msgid "View"
-msgstr ""
-
-#: ./templates/ExpenseSplits/index.php:32
-#: ./templates/Expenses/view.php:82
-#: ./templates/RecurringExpenseSplits/index.php:30
-msgid "Edit"
 msgstr ""
 
 #: ./templates/ExpenseSplits/index.php:49
@@ -307,113 +596,491 @@ msgid "Person"
 msgstr ""
 
 #: ./templates/ExpenseSplits/view.php:30
-#: ./templates/Expenses/view.php:30
-#: ./templates/Expenses/view.php:66
-#: ./templates/Payments/view.php:30
 #: ./templates/RecurringExpenseSplits/view.php:30
 msgid "Id"
 msgstr ""
 
 #: ./templates/ExpenseSplits/view.php:34
-#: ./templates/Expenses/view.php:69
 msgid "Share Ratio"
 msgstr ""
 
 #: ./templates/ExpenseSplits/view.php:38
-#: ./templates/Expenses/view.php:46
-#: ./templates/Expenses/view.php:70
-#: ./templates/Payments/view.php:42
+#: ./templates/Expenses/view.php:244
 #: ./templates/RecurringExpenseSplits/view.php:34
 msgid "Created"
 msgstr ""
 
-#: ./templates/Expenses/view.php:11
-msgid "Edit Expense"
-msgstr ""
-
-#: ./templates/Expenses/view.php:12
-msgid "Delete Expense"
-msgstr ""
-
-#: ./templates/Expenses/view.php:13
-msgid "List Expenses"
-msgstr ""
-
-#: ./templates/Expenses/view.php:14
+#: ./templates/Expenses/add.php:3
+#: ./templates/Expenses/index.php:5
 msgid "New Expense"
 msgstr ""
 
-#: ./templates/Expenses/view.php:22
-msgid "Title"
+#: ./templates/Expenses/add.php:18
+#: ./templates/Expenses/edit.php:18
+#: ./templates/People/view.php:22
+msgid "Basic Information"
 msgstr ""
 
-#: ./templates/Expenses/view.php:26
-msgid "Paid By"
+#: ./templates/Expenses/add.php:23
+#: ./templates/Expenses/edit.php:23
+msgid "Expense Title"
 msgstr ""
 
-#: ./templates/Expenses/view.php:34
-#: ./templates/Payments/view.php:34
-msgid "Amount"
+#: ./templates/Expenses/add.php:28
+#: ./templates/Expenses/edit.php:28
+msgid "e.g., Internet December 2024"
 msgstr ""
 
-#: ./templates/Expenses/view.php:38
-msgid "Commission"
+#: ./templates/Expenses/add.php:36
+#: ./templates/Expenses/edit.php:36
+#: ./templates/Expenses/index.php:29
+#: ./templates/Expenses/view.php:54
+#: ./templates/Statistics/index.php:171
+#: ./templates/layout/default.php:418
+msgid "Category"
 msgstr ""
 
-#: ./templates/Expenses/view.php:42
+#: ./templates/Expenses/add.php:42
+#: ./templates/Expenses/edit.php:42
+msgid "Select category"
+msgstr ""
+
+#: ./templates/Expenses/add.php:47
+#: ./templates/Expenses/edit.php:47
+msgid "Add new category"
+msgstr ""
+
+#: ./templates/Expenses/add.php:57
+#: ./templates/Expenses/edit.php:57
+#: ./templates/Expenses/index.php:31
+#: ./templates/Expenses/view.php:64
+#: ./templates/layout/default.php:425
+msgid "Supplier"
+msgstr ""
+
+#: ./templates/Expenses/add.php:63
+#: ./templates/Expenses/edit.php:63
+msgid "Select supplier (optional)"
+msgstr ""
+
+#: ./templates/Expenses/add.php:68
+#: ./templates/Expenses/edit.php:68
+msgid "Add new supplier"
+msgstr ""
+
+#: ./templates/Expenses/add.php:78
+#: ./templates/Expenses/edit.php:78
 msgid "Expense Date"
 msgstr ""
 
-#: ./templates/Expenses/view.php:50
-#: ./templates/Payments/view.php:46
-msgid "Modified"
-msgstr ""
-
-#: ./templates/Expenses/view.php:55
-#: ./templates/Payments/view.php:51
+#: ./templates/Expenses/add.php:92
+#: ./templates/Expenses/edit.php:92
+#: ./templates/Expenses/view.php:87
+#: ./templates/Payments/add.php:49
+#: ./templates/Payments/index.php:22
+#: ./templates/Suppliers/add.php:106
+#: ./templates/Suppliers/edit.php:106
 msgid "Notes"
 msgstr ""
 
-#: ./templates/Expenses/view.php:61
-msgid "Related Expense Splits"
+#: ./templates/Expenses/add.php:99
+#: ./templates/Expenses/edit.php:99
+msgid "Additional notes (optional)"
 msgstr ""
 
-#: ./templates/Expenses/view.php:67
-msgid "Expense Id"
+#: ./templates/Expenses/add.php:106
+#: ./templates/Expenses/edit.php:106
+msgid "Financial Details"
 msgstr ""
 
-#: ./templates/Expenses/view.php:68
-msgid "Person Id"
+#: ./templates/Expenses/add.php:112
+#: ./templates/Expenses/edit.php:112
+#: ./templates/Expenses/index.php:32
+#: ./templates/Expenses/view.php:209
+#: ./templates/Payments/index.php:21
+#: ./templates/People/view.php:68
+#: ./templates/People/view.php:100
+#: ./templates/Statistics/index.php:174
+#: ./templates/Statistics/index.php:265
+#: ./templates/Statistics/index.php:292
+msgid "Amount"
 msgstr ""
 
-#: ./templates/Payments/edit.php:18
-#: ./templates/Payments/view.php:13
-msgid "List Payments"
+#: ./templates/Expenses/add.php:127
+#: ./templates/Expenses/edit.php:127
+#: ./templates/Expenses/index.php:33
+#: ./templates/Expenses/view.php:213
+msgid "Commission"
 msgstr ""
 
-#: ./templates/Payments/edit.php:25
-#: ./templates/Payments/view.php:11
-msgid "Edit Payment"
+#: ./templates/Expenses/add.php:143
+#: ./templates/Expenses/edit.php:143
+#: ./templates/Expenses/index.php:35
+#: ./templates/Expenses/view.php:70
+#: ./templates/Statistics/index.php:173
+msgid "Paid By"
 msgstr ""
 
-#: ./templates/Payments/view.php:12
-msgid "Delete Payment"
+#: ./templates/Expenses/add.php:149
+#: ./templates/Expenses/edit.php:149
+#: ./templates/Payments/add.php:14
+#: ./templates/Payments/add.php:23
+#: ./templates/RecurringExpenses/add.php:50
+msgid "Select person"
 msgstr ""
 
-#: ./templates/Payments/view.php:14
+#: ./templates/Expenses/add.php:156
+#: ./templates/Expenses/edit.php:156
+#: ./templates/Expenses/index.php:36
+#: ./templates/Expenses/view.php:77
+msgid "Split Between"
+msgstr ""
+
+#: ./templates/Expenses/add.php:179
+#: ./templates/Expenses/edit.php:179
+msgid "Payment Status"
+msgstr ""
+
+#: ./templates/Expenses/add.php:189
+#: ./templates/Expenses/edit.php:189
+msgid "Mark as paid"
+msgstr ""
+
+#: ./templates/Expenses/add.php:197
+#: ./templates/Expenses/edit.php:197
+msgid "Payment Date"
+msgstr ""
+
+#: ./templates/Expenses/add.php:218
+msgid "Save Expense"
+msgstr ""
+
+#: ./templates/Expenses/edit.php:3
+msgid "Edit Expense"
+msgstr ""
+
+#: ./templates/Expenses/edit.php:218
+msgid "Update Expense"
+msgstr ""
+
+#: ./templates/Expenses/index.php:3
+#: ./templates/layout/tabler.php:144
+msgid "Expenses"
+msgstr ""
+
+#: ./templates/Expenses/index.php:14
+msgid "No expenses yet"
+msgstr ""
+
+#: ./templates/Expenses/index.php:15
+msgid "Start by adding your first expense"
+msgstr ""
+
+#: ./templates/Expenses/index.php:17
+msgid "Add First Expense"
+msgstr ""
+
+#: ./templates/Expenses/index.php:28
+#: ./templates/Expenses/view.php:30
+#: ./templates/Payments/index.php:17
+#: ./templates/People/view.php:66
+#: ./templates/People/view.php:98
+#: ./templates/Statistics/index.php:170
+msgid "Date"
+msgstr ""
+
+#: ./templates/Expenses/index.php:30
+#: ./templates/People/view.php:67
+#: ./templates/Statistics/index.php:172
+msgid "Title"
+msgstr ""
+
+#: ./templates/Expenses/index.php:34
+#: ./templates/Expenses/index.php:147
+#: ./templates/Expenses/view.php:217
+msgid "Total"
+msgstr ""
+
+#: ./templates/Expenses/index.php:37
+#: ./templates/Expenses/view.php:34
+#: ./templates/Suppliers/index.php:33
+#: ./templates/Users/index.php:33
+msgid "Status"
+msgstr ""
+
+#: ./templates/Expenses/index.php:57
+#: ./templates/Statistics/index.php:76
+#: ./templates/Statistics/index.php:191
+#: ./templates/Statistics/index.php:229
+msgid "Uncategorized"
+msgstr ""
+
+#: ./templates/Expenses/index.php:101
+msgid "Paid on"
+msgstr ""
+
+#: ./templates/Expenses/index.php:106
+#: ./templates/Expenses/view.php:46
+#: ./templates/Statistics/index.php:41
+msgid "Unpaid"
+msgstr ""
+
+#: ./templates/Expenses/index.php:134
+msgid "Are you sure you want to delete this expense?"
+msgstr ""
+
+#: ./templates/Expenses/view.php:25
+msgid "Expense Details"
+msgstr ""
+
+#: ./templates/Expenses/view.php:41
+msgid "on"
+msgstr ""
+
+#: ./templates/Expenses/view.php:97
+msgid "Attachments"
+msgstr ""
+
+#: ./templates/Expenses/view.php:110
+msgid "Upload Files"
+msgstr ""
+
+#: ./templates/Expenses/view.php:120
+msgid "Allowed types"
+msgstr ""
+
+#: ./templates/Expenses/view.php:120
+msgid "Max size"
+msgstr ""
+
+#: ./templates/Expenses/view.php:125
+msgid "Upload"
+msgstr ""
+
+#: ./templates/Expenses/view.php:138
+msgid "No attachments yet"
+msgstr ""
+
+#: ./templates/Expenses/view.php:177
+msgid "Download"
+msgstr ""
+
+#: ./templates/Expenses/view.php:184
+msgid "Are you sure you want to delete this file?"
+msgstr ""
+
+#: ./templates/Expenses/view.php:204
+msgid "Financial Summary"
+msgstr ""
+
+#: ./templates/Expenses/view.php:225
+msgid "Share per Person"
+msgstr ""
+
+#: ./templates/Expenses/view.php:238
+msgid "Timeline"
+msgstr ""
+
+#: ./templates/Expenses/view.php:250
+msgid "Modified"
+msgstr ""
+
+#: ./templates/Payments/add.php:2
 msgid "New Payment"
 msgstr ""
 
-#: ./templates/Payments/view.php:22
-msgid "From Person"
+#: ./templates/Payments/add.php:11
+msgid "From (payer)"
 msgstr ""
 
-#: ./templates/Payments/view.php:26
-msgid "To Person"
+#: ./templates/Payments/add.php:20
+msgid "To (recipient)"
 msgstr ""
 
-#: ./templates/Payments/view.php:38
-msgid "Payment Date"
+#: ./templates/Payments/add.php:29
+#: ./templates/RecurringExpenses/add.php:28
+msgid "Amount (€)"
+msgstr ""
+
+#: ./templates/Payments/add.php:39
+msgid "Date of payment"
+msgstr ""
+
+#: ./templates/Payments/add.php:57
+msgid "Save Payment"
+msgstr ""
+
+#: ./templates/Payments/index.php:3
+#: ./templates/People/index.php:50
+#: ./templates/layout/tabler.php:181
+msgid "Payments"
+msgstr ""
+
+#: ./templates/Payments/index.php:4
+msgid "+ New Payment"
+msgstr ""
+
+#: ./templates/Payments/index.php:10
+msgid "No payments recorded yet"
+msgstr ""
+
+#: ./templates/Payments/index.php:18
+msgid "From"
+msgstr ""
+
+#: ./templates/Payments/index.php:20
+msgid "To"
+msgstr ""
+
+#: ./templates/Payments/index.php:39
+#: ./templates/RecurringExpenses/index.php:80
+msgid "Are you sure?"
+msgstr ""
+
+#: ./templates/People/add.php:3
+#: ./templates/People/index.php:5
+msgid "New Person"
+msgstr ""
+
+#: ./templates/People/add.php:15
+#: ./templates/People/edit.php:15
+msgid "Person Details"
+msgstr ""
+
+#: ./templates/People/add.php:23
+#: ./templates/People/edit.php:23
+msgid "Name and Surname"
+msgstr ""
+
+#: ./templates/People/add.php:28
+#: ./templates/People/edit.php:28
+msgid "e.g. Janez Novak"
+msgstr ""
+
+#: ./templates/People/add.php:32
+#: ./templates/People/edit.php:32
+msgid "Enter the full name of the person participating in cost sharing."
+msgstr ""
+
+#: ./templates/People/add.php:39
+#: ./templates/People/edit.php:39
+#: ./templates/Users/add.php:96
+#: ./templates/Users/edit.php:94
+#: ./templates/Users/profile.php:86
+msgid "Email Address"
+msgstr ""
+
+#: ./templates/People/add.php:44
+#: ./templates/People/edit.php:44
+msgid "janez.novak@example.com"
+msgstr ""
+
+#: ./templates/People/add.php:49
+#: ./templates/People/edit.php:49
+msgid "Optional - email address for notifications and contact."
+msgstr ""
+
+#: ./templates/People/add.php:62
+#: ./templates/People/edit.php:62
+msgid "Save Person"
+msgstr ""
+
+#: ./templates/People/add.php:78
+msgid "Useful Tips"
+msgstr ""
+
+#: ./templates/People/add.php:81
+msgid "When you add a person, they will be automatically available for cost sharing."
+msgstr ""
+
+#: ./templates/People/add.php:82
+msgid "You can edit or remove a person at any time in the people list."
+msgstr ""
+
+#: ./templates/People/add.php:83
+msgid "The email address is optional, but recommended for notifications."
+msgstr ""
+
+#: ./templates/People/edit.php:3
+msgid "Edit Person"
+msgstr ""
+
+#: ./templates/People/edit.php:79
+msgid "Danger Zone"
+msgstr ""
+
+#: ./templates/People/edit.php:83
+msgid "Warning:"
+msgstr ""
+
+#: ./templates/People/edit.php:83
+msgid "Deleting a person will also delete all related costs, splits, and payments."
+msgstr ""
+
+#: ./templates/People/edit.php:86
+msgid "Delete this person"
+msgstr ""
+
+#: ./templates/People/edit.php:89
+msgid "Are you SURE you want to delete %s? All associated data will be lost!"
+msgstr ""
+
+#: ./templates/People/index.php:3
+#: ./templates/layout/tabler.php:207
+msgid "People"
+msgstr ""
+
+#: ./templates/People/index.php:14
+msgid "No people added yet"
+msgstr ""
+
+#: ./templates/People/index.php:15
+msgid "Start by adding people who will participate in sharing the costs."
+msgstr ""
+
+#: ./templates/People/index.php:17
+msgid "Add first person"
+msgstr ""
+
+#: ./templates/People/index.php:38
+msgid "No email"
+msgstr ""
+
+#: ./templates/People/index.php:46
+msgid "Costs"
+msgstr ""
+
+#: ./templates/People/index.php:79
+msgid "Are you sure you want to delete %s?"
+msgstr ""
+
+#: ./templates/People/view.php:38
+#: ./templates/People/view.php:46
+msgid "Paid expenses"
+msgstr ""
+
+#: ./templates/People/view.php:42
+msgid "Completed payments"
+msgstr ""
+
+#: ./templates/People/view.php:56
+msgid "Last Paid Expenses"
+msgstr ""
+
+#: ./templates/People/view.php:60
+msgid "No expenses paid yet"
+msgstr ""
+
+#: ./templates/People/view.php:88
+msgid "Last Payments"
+msgstr ""
+
+#: ./templates/People/view.php:92
+msgid "No payments completed yet"
+msgstr ""
+
+#: ./templates/People/view.php:99
+msgid "Recipient"
 msgstr ""
 
 #: ./templates/RecurringExpenseSplits/add.php:13
@@ -448,7 +1115,536 @@ msgstr ""
 msgid "Recurring Expense"
 msgstr ""
 
-#: ./templates/layout/error.php:36
-msgid "Back"
+#: ./templates/RecurringExpenses/add.php:2
+msgid "New Recurring Expense"
+msgstr ""
+
+#: ./templates/RecurringExpenses/add.php:11
+msgid "Title (e.g. Internet)"
+msgstr ""
+
+#: ./templates/RecurringExpenses/add.php:18
+msgid "Day of the month to repeat the expense"
+msgstr ""
+
+#: ./templates/RecurringExpenses/add.php:20
+msgid "day"
+msgstr ""
+
+#: ./templates/RecurringExpenses/add.php:37
+msgid "Commission (€)"
+msgstr ""
+
+#: ./templates/RecurringExpenses/add.php:47
+msgid "Paid by"
+msgstr ""
+
+#: ./templates/RecurringExpenses/add.php:56
+#: ./templates/RecurringExpenses/index.php:55
+msgid "Split Between:"
+msgstr ""
+
+#: ./templates/RecurringExpenses/add.php:77
+msgid "Save"
+msgstr ""
+
+#: ./templates/RecurringExpenses/index.php:3
+#: ./templates/layout/tabler.php:194
+msgid "Recurring Expenses"
+msgstr ""
+
+#: ./templates/RecurringExpenses/index.php:4
+msgid "+ New Recurring Expense"
+msgstr ""
+
+#: ./templates/RecurringExpenses/index.php:9
+msgid "Reminders"
+msgstr ""
+
+#: ./templates/RecurringExpenses/index.php:10
+msgid "The following expenses require your attention:"
+msgstr ""
+
+#: ./templates/RecurringExpenses/index.php:21
+msgid "Add for this month"
+msgstr ""
+
+#: ./templates/RecurringExpenses/index.php:39
+msgid "Need attention"
+msgstr ""
+
+#: ./templates/RecurringExpenses/index.php:45
+msgid "Amount:"
+msgstr ""
+
+#: ./templates/RecurringExpenses/index.php:46
+msgid "commission"
+msgstr ""
+
+#: ./templates/RecurringExpenses/index.php:49
+msgid "Repetition:"
+msgstr ""
+
+#: ./templates/RecurringExpenses/index.php:49
+msgid "Every"
+msgstr ""
+
+#: ./templates/RecurringExpenses/index.php:49
+msgid "day of the month"
+msgstr ""
+
+#: ./templates/RecurringExpenses/index.php:52
+msgid "Paid by:"
+msgstr ""
+
+#: ./templates/RecurringExpenses/index.php:66
+msgid "Last added:"
+msgstr ""
+
+#: ./templates/RecurringExpenses/index.php:72
+msgid "Add now"
+msgstr ""
+
+#: ./templates/Statistics/index.php:2
+#: ./templates/layout/default.php:344
+#: ./templates/layout/tabler.php:219
+#: ./templates/layout/tabler.php:242
+msgid "Statistics"
+msgstr ""
+
+#: ./templates/Statistics/index.php:11
+msgid "Total Expenses"
+msgstr ""
+
+#: ./templates/Statistics/index.php:21
+msgid "Total Amount"
+msgstr ""
+
+#: ./templates/Statistics/index.php:54
+msgid "Expenses by Category"
+msgstr ""
+
+#: ./templates/Statistics/index.php:59
+#: ./templates/Statistics/index.php:104
+#: ./templates/Statistics/index.php:143
+#: ./templates/Statistics/index.php:163
+msgid "No data available"
+msgstr ""
+
+#: ./templates/Statistics/index.php:80
+#: ./templates/Statistics/index.php:117
+msgid "expenses"
+msgstr ""
+
+#: ./templates/Statistics/index.php:99
+msgid "Expenses by Person"
+msgstr ""
+
+#: ./templates/Statistics/index.php:138
+msgid "Monthly Trend (Last 12 Months)"
+msgstr ""
+
+#: ./templates/Statistics/index.php:158
+msgid "Top 10 Largest Expenses"
+msgstr ""
+
+#: ./templates/Suppliers/add.php:3
+#: ./templates/Suppliers/index.php:5
+msgid "New Supplier"
+msgstr ""
+
+#: ./templates/Suppliers/add.php:17
+#: ./templates/Suppliers/edit.php:17
+msgid "Company Information"
+msgstr ""
+
+#: ./templates/Suppliers/add.php:22
+#: ./templates/Suppliers/edit.php:22
+msgid "Company Name"
+msgstr ""
+
+#: ./templates/Suppliers/add.php:27
+#: ./templates/Suppliers/edit.php:27
+msgid "e.g., Telekom Slovenia"
+msgstr ""
+
+#: ./templates/Suppliers/add.php:36
+#: ./templates/Suppliers/edit.php:36
+#: ./templates/Suppliers/index.php:29
+msgid "Contact Person"
+msgstr ""
+
+#: ./templates/Suppliers/add.php:41
+#: ./templates/Suppliers/edit.php:41
+msgid "Full name"
+msgstr ""
+
+#: ./templates/Suppliers/add.php:48
+#: ./templates/Suppliers/edit.php:48
+#: ./templates/Suppliers/index.php:32
+msgid "Tax Number"
+msgstr ""
+
+#: ./templates/Suppliers/add.php:53
+#: ./templates/Suppliers/edit.php:53
+msgid "VAT/Tax ID"
+msgstr ""
+
+#: ./templates/Suppliers/add.php:60
+#: ./templates/Suppliers/edit.php:60
+msgid "Contact Details"
+msgstr ""
+
+#: ./templates/Suppliers/add.php:66
+#: ./templates/Suppliers/edit.php:66
+#: ./templates/Suppliers/index.php:30
+#: ./templates/Users/index.php:30
+msgid "Email"
+msgstr ""
+
+#: ./templates/Suppliers/add.php:79
+#: ./templates/Suppliers/edit.php:79
+#: ./templates/Suppliers/index.php:31
+msgid "Phone"
+msgstr ""
+
+#: ./templates/Suppliers/add.php:92
+#: ./templates/Suppliers/edit.php:92
+msgid "Address"
+msgstr ""
+
+#: ./templates/Suppliers/add.php:99
+#: ./templates/Suppliers/edit.php:99
+msgid "Street, City, Postal Code"
+msgstr ""
+
+#: ./templates/Suppliers/add.php:113
+#: ./templates/Suppliers/edit.php:113
+msgid "Additional notes"
+msgstr ""
+
+#: ./templates/Suppliers/add.php:140
+msgid "Save Supplier"
+msgstr ""
+
+#: ./templates/Suppliers/edit.php:3
+msgid "Edit Supplier"
+msgstr ""
+
+#: ./templates/Suppliers/edit.php:140
+msgid "Update Supplier"
+msgstr ""
+
+#: ./templates/Suppliers/index.php:3
+#: ./templates/layout/default.php:324
+#: ./templates/layout/tabler.php:168
+msgid "Suppliers"
+msgstr ""
+
+#: ./templates/Suppliers/index.php:14
+msgid "No suppliers yet"
+msgstr ""
+
+#: ./templates/Suppliers/index.php:15
+msgid "Add suppliers to track who you pay expenses to"
+msgstr ""
+
+#: ./templates/Suppliers/index.php:17
+msgid "Add First Supplier"
+msgstr ""
+
+#: ./templates/Suppliers/index.php:73
+#: ./templates/Users/index.php:81
+msgid "Inactive"
+msgstr ""
+
+#: ./templates/Suppliers/index.php:92
+msgid "Are you sure you want to delete this supplier?"
+msgstr ""
+
+#: ./templates/Users/add.php:3
+#: ./templates/Users/index.php:5
+msgid "Add User"
+msgstr ""
+
+#: ./templates/Users/add.php:15
+msgid "User Information"
+msgstr ""
+
+#: ./templates/Users/add.php:21
+#: ./templates/Users/edit.php:24
+msgid "Login Credentials"
+msgstr ""
+
+#: ./templates/Users/add.php:28
+#: ./templates/Users/edit.php:31
+#: ./templates/Users/index.php:28
+#: ./templates/Users/login.php:89
+msgid "Username"
+msgstr ""
+
+#: ./templates/Users/add.php:33
+msgid "e.g., jnovak"
+msgstr ""
+
+#: ./templates/Users/add.php:37
+msgid "Used for login"
+msgstr ""
+
+#: ./templates/Users/add.php:44
+#: ./templates/Users/login.php:90
+msgid "Password"
+msgstr ""
+
+#: ./templates/Users/add.php:50
+msgid "Minimum 6 characters"
+msgstr ""
+
+#: ./templates/Users/add.php:54
+msgid "Choose a strong password"
+msgstr ""
+
+#: ./templates/Users/add.php:62
+#: ./templates/Users/edit.php:62
+#: ./templates/Users/profile.php:54
+msgid "Personal Information"
+msgstr ""
+
+#: ./templates/Users/add.php:69
+#: ./templates/Users/edit.php:69
+#: ./templates/Users/profile.php:61
+msgid "First Name"
+msgstr ""
+
+#: ./templates/Users/add.php:74
+msgid "First name"
+msgstr ""
+
+#: ./templates/Users/add.php:82
+#: ./templates/Users/edit.php:81
+#: ./templates/Users/profile.php:73
+msgid "Last Name"
+msgstr ""
+
+#: ./templates/Users/add.php:87
+msgid "Last name"
+msgstr ""
+
+#: ./templates/Users/add.php:110
+#: ./templates/Users/edit.php:107
+#: ./templates/layout/tabler.php:260
+msgid "Settings"
+msgstr ""
+
+#: ./templates/Users/add.php:116
+#: ./templates/Users/edit.php:113
+#: ./templates/Users/index.php:31
+msgid "Role"
+msgstr ""
+
+#: ./templates/Users/add.php:122
+#: ./templates/Users/add.php:129
+#: ./templates/Users/edit.php:119
+#: ./templates/Users/index.php:61
+#: ./templates/Users/profile.php:23
+#: ./templates/layout/tabler.php:86
+msgid "User"
+msgstr ""
+
+#: ./templates/Users/add.php:123
+#: ./templates/Users/add.php:131
+#: ./templates/Users/edit.php:120
+#: ./templates/Users/profile.php:19
+#: ./templates/layout/tabler.php:86
+msgid "Administrator"
+msgstr ""
+
+#: ./templates/Users/add.php:129
+msgid "Can view and manage expenses"
+msgstr ""
+
+#: ./templates/Users/add.php:131
+msgid "Full access including user management"
+msgstr ""
+
+#: ./templates/Users/add.php:148
+msgid "Inactive users cannot log in"
+msgstr ""
+
+#: ./templates/Users/add.php:162
+msgid "Create User"
+msgstr ""
+
+#: ./templates/Users/edit.php:3
+msgid "Edit User"
+msgstr ""
+
+#: ./templates/Users/edit.php:17
+msgid "Editing"
+msgstr ""
+
+#: ./templates/Users/edit.php:43
+#: ./templates/Users/profile.php:110
+msgid "New Password"
+msgstr ""
+
+#: ./templates/Users/edit.php:49
+msgid "Leave blank to keep current"
+msgstr ""
+
+#: ./templates/Users/edit.php:54
+msgid "Leave blank if you don't want to change it"
+msgstr ""
+
+#: ./templates/Users/edit.php:142
+#: ./templates/Users/index.php:32
+msgid "Last Login"
+msgstr ""
+
+#: ./templates/Users/edit.php:155
+msgid "Update User"
+msgstr ""
+
+#: ./templates/Users/index.php:3
+#: ./templates/layout/default.php:462
+#: ./templates/layout/tabler.php:103
+msgid "User Management"
+msgstr ""
+
+#: ./templates/Users/index.php:14
+msgid "No users yet"
+msgstr ""
+
+#: ./templates/Users/index.php:15
+msgid "Add users to give them access to the system"
+msgstr ""
+
+#: ./templates/Users/index.php:17
+msgid "Add First User"
+msgstr ""
+
+#: ./templates/Users/index.php:44
+msgid "You"
+msgstr ""
+
+#: ./templates/Users/index.php:57
+msgid "Admin"
+msgstr ""
+
+#: ./templates/Users/index.php:101
+msgid "Are you sure you want to delete this user?"
+msgstr ""
+
+#: ./templates/Users/index.php:119
+msgid "Note"
+msgstr ""
+
+#: ./templates/Users/index.php:119
+msgid "Only administrators can manage users. Regular users can only edit their own profile."
+msgstr ""
+
+#: ./templates/Users/login.php:8
+msgid "Login"
+msgstr ""
+
+#: ./templates/Users/login.php:8
+#: ./templates/Users/login.php:79
+#: ./templates/Users/login.php:112
+msgid "Expense Tracker"
+msgstr ""
+
+#: ./templates/Users/login.php:84
+msgid "Sign in to your account to continue"
+msgstr ""
+
+#: ./templates/Users/login.php:89
+msgid "your@email.com"
+msgstr ""
+
+#: ./templates/Users/login.php:90
+msgid "Your password"
+msgstr ""
+
+#: ./templates/Users/login.php:91
+msgid "Remember me on this device"
+msgstr ""
+
+#: ./templates/Users/login.php:106
+msgid "Default credentials"
+msgstr ""
+
+#: ./templates/Users/login.php:112
+msgid "All rights reserved"
+msgstr ""
+
+#: ./templates/Users/profile.php:2
+#: ./templates/layout/default.php:454
+#: ./templates/layout/tabler.php:97
+msgid "My Profile"
+msgstr ""
+
+#: ./templates/Users/profile.php:32
+msgid "Member since"
+msgstr ""
+
+#: ./templates/Users/profile.php:37
+msgid "Last login"
+msgstr ""
+
+#: ./templates/Users/profile.php:48
+msgid "Edit Profile"
+msgstr ""
+
+#: ./templates/Users/profile.php:99
+msgid "Change Password"
+msgstr ""
+
+#: ./templates/Users/profile.php:104
+msgid "Leave password field blank if you don't want to change it"
+msgstr ""
+
+#: ./templates/Users/profile.php:116
+msgid "Enter new password"
+msgstr ""
+
+#: ./templates/Users/profile.php:121
+msgid "Minimum 6 characters recommended"
+msgstr ""
+
+#: ./templates/Users/profile.php:129
+msgid "Save Changes"
+msgstr ""
+
+#: ./templates/element/Flash/error.php:7
+msgid "Error"
+msgstr ""
+
+#: ./templates/element/Flash/success.php:7
+msgid "Success"
+msgstr ""
+
+#: ./templates/layout/default.php:473
+#: ./templates/layout/tabler.php:110
+msgid "Logout"
+msgstr ""
+
+#: ./templates/layout/tabler.php:92
+msgid "Signed in as"
+msgstr ""
+
+#: ./templates/layout/tabler.php:236
+msgid "Reports"
+msgstr ""
+
+#: ./templates/layout/tabler.php:294
+msgid "Help"
+msgstr ""
+
+#: ./templates/layout/tabler.php:306
+msgid "Made with"
+msgstr ""
+
+#: ./templates/layout/tabler.php:306
+msgid "using CakePHP"
 msgstr ""
 

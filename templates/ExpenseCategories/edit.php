@@ -19,19 +19,7 @@
                         <div class="col-md-6 mb-3">
                             <?= $this->Form->control('name', [
                                 'label' => [
-                                    'text' => '<i class="fas fa-tag me-2"></i>' . __('Name (Slovenian)'),
-                                    'escape' => false,
-                                    'class' => 'form-label fw-bold'
-                                ],
-                                'class' => 'form-control',
-                                'required' => true
-                            ]) ?>
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <?= $this->Form->control('name_en', [
-                                'label' => [
-                                    'text' => '<i class="fas fa-tag me-2"></i>' . __('Name (English)'),
+                                    'text' => '<i class="fas fa-tag me-2"></i>' . __('Name'),
                                     'escape' => false,
                                     'class' => 'form-label fw-bold'
                                 ],

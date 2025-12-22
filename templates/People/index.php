@@ -1,8 +1,8 @@
 <div class="container-fluid mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1><i class="fas fa-users me-2"></i>Sodelavci</h1>
+        <h1><i class="fas fa-users me-2"></i><?= __('People') ?></h1>
         <?= $this->Html->link(
-            '<i class="fas fa-user-plus me-2"></i>Nova oseba',
+            '<i class="fas fa-user-plus me-2"></i>' . __('New Person'),
             ['action' => 'add'],
             ['class' => 'btn btn-info', 'escape' => false]
         ) ?>
@@ -11,10 +11,10 @@
     <?php if (empty($people)): ?>
         <div class="alert alert-info text-center py-5">
             <i class="fas fa-users fa-3x mb-3 d-block"></i>
-            <h4>Še ni dodanih oseb</h4>
-            <p class="mb-4">Začnite z dodajanjem oseb, ki bodo sodelovale pri delitvi stroškov.</p>
+            <h4><?= __('No people added yet') ?></h4>
+            <p class="mb-4"><?= __('Start by adding people who will participate in sharing the costs.') ?></p>
             <?= $this->Html->link(
-                '<i class="fas fa-plus-circle me-2"></i>Dodaj prvo osebo',
+                '<i class="fas fa-plus-circle me-2"></i>' . __('Add first person'),
                 ['action' => 'add'],
                 ['class' => 'btn btn-info btn-lg', 'escape' => false]
             ) ?>
@@ -35,7 +35,7 @@
                                 </p>
                             <?php else: ?>
                                 <p class="card-text text-muted small mb-3">
-                                    <i class="fas fa-envelope-open me-1"></i>Brez e-pošte
+                                    <i class="fas fa-envelope-open me-1"></i><?= __('No email') ?>
                                 </p>
                             <?php endif; ?>
 
@@ -43,11 +43,11 @@
                             <div class="person-stats bg-light rounded p-2 mb-3">
                                 <div class="row text-center">
                                     <div class="col-6 border-end">
-                                        <small class="text-muted d-block">Stroški</small>
+                                        <small class="text-muted d-block"><?= __('Costs') ?></small>
                                         <strong><?= count($person->expenses) ?></strong>
                                     </div>
                                     <div class="col-6">
-                                        <small class="text-muted d-block">Plačila</small>
+                                        <small class="text-muted d-block"><?= __('Payments') ?></small>
                                         <strong><?= count($person->payments_from) ?></strong>
                                     </div>
                                 </div>
@@ -60,7 +60,7 @@
                                     [
                                         'class' => 'btn btn-sm btn-warning',
                                         'escape' => false,
-                                        'title' => 'Uredi'
+                                        'title' => __('Edit')
                                     ]
                                 ) ?>
                                 <?= $this->Html->link(
@@ -69,17 +69,17 @@
                                     [
                                         'class' => 'btn btn-sm btn-info',
                                         'escape' => false,
-                                        'title' => 'Poglej'
+                                        'title' => __('View')
                                     ]
                                 ) ?>
                                 <?= $this->Form->postLink(
                                     '<i class="fas fa-trash"></i>',
                                     ['action' => 'delete', $person->id],
                                     [
-                                        'confirm' => 'Ali ste prepričani, da želite izbrisati ' . $person->name . '?',
+                                        'confirm' => __('Are you sure you want to delete %s?', $person->name),
                                         'class' => 'btn btn-sm btn-danger',
                                         'escape' => false,
-                                        'title' => 'Izbriši'
+                                        'title' => __('Delete')
                                     ]
                                 ) ?>
                             </div>

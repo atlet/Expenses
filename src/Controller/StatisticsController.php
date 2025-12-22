@@ -28,7 +28,6 @@ class StatisticsController extends AppController {
             ->select([
                 'category_id' => 'expense_category_id',
                 'category_name' => 'expense_categories.name',
-                'category_name_en' => 'expense_categories.name_en',
                 'category_color' => 'expense_categories.color',
                 'category_icon' => 'expense_categories.icon',
                 'total' => 'SUM(Expenses.amount + Expenses.commission)',

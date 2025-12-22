@@ -1,5 +1,5 @@
 <div class="container mt-4">
-    <h1 class="mb-4">Novo plačilo dolga</h1>
+    <h1 class="mb-4"><?= __('New Payment') ?></h1>
 
     <div class="card">
         <div class="card-body">
@@ -8,25 +8,25 @@
             <div class="row">
                 <div class="col-md-3 mb-3">
                     <?= $this->Form->control('from_person_id', [
-                        'label' => 'Od (plačnik)',
+                        'label' => __('From (payer)'),
                         'class' => 'form-select',
                         'options' => $people,
-                        'empty' => 'Izberite osebo'
+                        'empty' => __('Select person')
                     ]) ?>
                 </div>
 
                 <div class="col-md-3 mb-3">
                     <?= $this->Form->control('to_person_id', [
-                        'label' => 'Za (prejemnik)',
+                        'label' => __('To (recipient)'),
                         'class' => 'form-select',
                         'options' => $people,
-                        'empty' => 'Izberite osebo'
+                        'empty' => __('Select person')
                     ]) ?>
                 </div>
 
                 <div class="col-md-3 mb-3">
                     <?= $this->Form->control('amount', [
-                        'label' => 'Znesek (€)',
+                        'label' => __('Amount (€)'),
                         'class' => 'form-control',
                         'type' => 'number',
                         'step' => '0.01',
@@ -36,7 +36,7 @@
 
                 <div class="col-md-3 mb-3">
                     <?= $this->Form->control('payment_date', [
-                        'label' => 'Datum plačila',
+                        'label' => __('Date of payment'),
                         'class' => 'form-control',
                         'type' => 'date',
                         'default' => date('Y-m-d')
@@ -46,7 +46,7 @@
 
             <div class="mb-3">
                 <?= $this->Form->control('notes', [
-                    'label' => 'Opombe',
+                    'label' => __('Notes'),
                     'class' => 'form-control',
                     'type' => 'textarea',
                     'rows' => 2
@@ -54,8 +54,8 @@
             </div>
 
             <div class="d-flex gap-2">
-                <?= $this->Form->button('Shrani plačilo', ['class' => 'btn btn-primary']) ?>
-                <?= $this->Html->link('Prekliči', ['action' => 'index'], ['class' => 'btn btn-secondary']) ?>
+                <?= $this->Form->button(__('Save Payment'), ['class' => 'btn btn-primary']) ?>
+                <?= $this->Html->link(__('Cancel'), ['action' => 'index'], ['class' => 'btn btn-secondary']) ?>
             </div>
 
             <?= $this->Form->end() ?>

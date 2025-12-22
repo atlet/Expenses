@@ -30,10 +30,7 @@
                                     <h5 class="card-title mb-2">
                                         <span class="badge" style="background-color: <?= h($category->color) ?>">
                                             <i class="fas <?= h($category->icon) ?> me-2"></i>
-                                            <?php
-                                            $locale = \Cake\I18n\I18n::getLocale();
-                                            echo $locale === 'en_US' ? h($category->name_en) : h($category->name);
-                                            ?>
+                                            <?= h($category->name) ?>
                                         </span>
                                     </h5>
                                     <?php if ($category->description): ?>

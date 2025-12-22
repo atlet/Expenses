@@ -34,12 +34,6 @@ class ExpenseCategoriesTable extends Table {
             ->notEmptyString('name');
 
         $validator
-            ->scalar('name_en')
-            ->maxLength('name_en', 100)
-            ->requirePresence('name_en', 'create')
-            ->notEmptyString('name_en');
-
-        $validator
             ->scalar('color')
             ->maxLength('color', 7)
             ->notEmptyString('color');
@@ -54,13 +48,5 @@ class ExpenseCategoriesTable extends Table {
             ->notEmptyString('is_active');
 
         return $validator;
-    }
-
-    /**
-     * Vrne prevedeno ime kategorije glede na trenutni locale
-     */
-    public function getTranslatedName($category): string {
-        $locale = \Cake\I18n\I18n::getLocale();
-        return $locale === 'en_US' ? $category->name_en : $category->name;
     }
 }

@@ -32,10 +32,10 @@ class PeopleController extends AppController {
         if ($this->request->is('post')) {
             $person = $this->People->patchEntity($person, $this->request->getData());
             if ($this->People->save($person)) {
-                $this->Flash->success(__('Oseba je bila dodana.'));
+                $this->Flash->success(__('The person has been added.'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Osebe ni bilo mogoče dodati. Prosim poskusite ponovno.'));
+            $this->Flash->error(__('The person could not be added. Please try again.'));
         }
         $this->set(compact('person'));
     }
@@ -45,10 +45,10 @@ class PeopleController extends AppController {
         if ($this->request->is(['patch', 'post', 'put'])) {
             $person = $this->People->patchEntity($person, $this->request->getData());
             if ($this->People->save($person)) {
-                $this->Flash->success(__('Oseba je bila posodobljena.'));
+                $this->Flash->success(__('The person has been updated.'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Osebe ni bilo mogoče posodobiti. Prosim poskusite ponovno.'));
+            $this->Flash->error(__('The person could not be updated. Please try again.'));
         }
         $this->set(compact('person'));
     }
@@ -57,9 +57,9 @@ class PeopleController extends AppController {
         $this->request->allowMethod(['post', 'delete']);
         $person = $this->People->get($id);
         if ($this->People->delete($person)) {
-            $this->Flash->success(__('Oseba je bila izbrisana.'));
+            $this->Flash->success(__('The person has been deleted.'));
         } else {
-            $this->Flash->error(__('Osebe ni bilo mogoče izbrisati. Prosim poskusite ponovno.'));
+            $this->Flash->error(__('The person could not be deleted. Please try again.'));
         }
         return $this->redirect(['action' => 'index']);
     }

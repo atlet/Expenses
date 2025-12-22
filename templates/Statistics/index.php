@@ -69,10 +69,7 @@
                                                 <?php if ($item['category_id']): ?>
                                                     <span class="badge" style="background-color: <?= h($item['category_color']) ?>">
                                                         <i class="fas <?= h($item['category_icon']) ?> me-1"></i>
-                                                        <?php
-                                                        $locale = \Cake\I18n\I18n::getLocale();
-                                                        echo $locale === 'en_US' ? h($item['category_name_en']) : h($item['category_name']);
-                                                        ?>
+                                                        <?= h($item['category_name']) ?>
                                                     </span>
                                                 <?php else: ?>
                                                     <span class="badge bg-secondary">
@@ -188,10 +185,7 @@
                                                 <?php if ($expense->expense_category): ?>
                                                     <span class="badge" style="background-color: <?= h($expense->expense_category->color) ?>">
                                                         <i class="fas <?= h($expense->expense_category->icon) ?> me-1"></i>
-                                                        <?php
-                                                        $locale = \Cake\I18n\I18n::getLocale();
-                                                        echo $locale === 'en_US' ? h($expense->expense_category->name_en) : h($expense->expense_category->name);
-                                                        ?>
+                                                        <?= h($expense->expense_category->name) ?>
                                                     </span>
                                                 <?php else: ?>
                                                     <span class="badge bg-secondary"><?= __('Uncategorized') ?></span>
@@ -230,7 +224,7 @@
                             $locale = \Cake\I18n\I18n::getLocale();
                             foreach ($expensesByCategory as $item) {
                                 if ($item['category_id']) {
-                                    echo "'" . ($locale === 'en_US' ? $item['category_name_en'] : $item['category_name']) . "',";
+                                    echo "'" . $item['category_name'] . "',";
                                 } else {
                                     echo "'" . __('Uncategorized') . "',";
                                 }

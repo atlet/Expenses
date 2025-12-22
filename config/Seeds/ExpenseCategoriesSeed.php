@@ -9,7 +9,6 @@ class ExpenseCategoriesSeed extends BaseSeed {
         $data = [
             [
                 'name' => 'Internet',
-                'name_en' => 'Internet',
                 'color' => '#007bff',
                 'icon' => 'fa-wifi',
                 'description' => 'Stroški internetne povezave',
@@ -19,7 +18,6 @@ class ExpenseCategoriesSeed extends BaseSeed {
             ],
             [
                 'name' => 'Elektrika',
-                'name_en' => 'Electricity',
                 'color' => '#ffc107',
                 'icon' => 'fa-bolt',
                 'description' => 'Stroški električne energije',
@@ -29,7 +27,6 @@ class ExpenseCategoriesSeed extends BaseSeed {
             ],
             [
                 'name' => 'Najem',
-                'name_en' => 'Rent',
                 'color' => '#28a745',
                 'icon' => 'fa-building',
                 'description' => 'Najemnina za pisarniški prostor',
@@ -39,7 +36,6 @@ class ExpenseCategoriesSeed extends BaseSeed {
             ],
             [
                 'name' => 'Čiščenje',
-                'name_en' => 'Cleaning',
                 'color' => '#17a2b8',
                 'icon' => 'fa-broom',
                 'description' => 'Stroški čiščenja',
@@ -49,7 +45,6 @@ class ExpenseCategoriesSeed extends BaseSeed {
             ],
             [
                 'name' => 'Pisarniški material',
-                'name_en' => 'Office Supplies',
                 'color' => '#6610f2',
                 'icon' => 'fa-pen',
                 'description' => 'Papir, pisala, itd.',
@@ -59,7 +54,6 @@ class ExpenseCategoriesSeed extends BaseSeed {
             ],
             [
                 'name' => 'Telefon',
-                'name_en' => 'Phone',
                 'color' => '#e83e8c',
                 'icon' => 'fa-phone',
                 'description' => 'Telefonski stroški',
@@ -69,7 +63,6 @@ class ExpenseCategoriesSeed extends BaseSeed {
             ],
             [
                 'name' => 'Vzdrževanje',
-                'name_en' => 'Maintenance',
                 'color' => '#fd7e14',
                 'icon' => 'fa-wrench',
                 'description' => 'Popravila in vzdrževanje',
@@ -79,7 +72,6 @@ class ExpenseCategoriesSeed extends BaseSeed {
             ],
             [
                 'name' => 'Ostalo',
-                'name_en' => 'Other',
                 'color' => '#6c757d',
                 'icon' => 'fa-ellipsis-h',
                 'description' => 'Drugi stroški',

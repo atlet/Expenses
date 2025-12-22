@@ -1,8 +1,8 @@
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1><i class="fas fa-user-edit me-2"></i>Uredi osebo</h1>
+        <h1><i class="fas fa-user-edit me-2"></i><?= __('Edit Person') ?></h1>
         <?= $this->Html->link(
-            '<i class="fas fa-arrow-left me-2"></i>Nazaj',
+            '<i class="fas fa-arrow-left me-2"></i>' . __('Back'),
             ['action' => 'index'],
             ['class' => 'btn btn-secondary', 'escape' => false]
         ) ?>
@@ -12,7 +12,7 @@
         <div class="col-md-8 offset-md-2">
             <div class="card">
                 <div class="card-header bg-warning text-dark">
-                    <h5 class="mb-0"><i class="fas fa-user-circle me-2"></i>Podatki o osebi</h5>
+                    <h5 class="mb-0"><i class="fas fa-user-circle me-2"></i><?= __('Person Details') ?></h5>
                 </div>
                 <div class="card-body">
                     <?= $this->Form->create($person, ['class' => 'needs-validation']) ?>
@@ -20,33 +20,33 @@
                     <div class="mb-4">
                         <?= $this->Form->control('name', [
                             'label' => [
-                                'text' => '<i class="fas fa-user me-2"></i>Ime in priimek',
+                                'text' => '<i class="fas fa-user me-2"></i>' . __('Name and Surname'),
                                 'escape' => false,
                                 'class' => 'form-label fw-bold'
                             ],
                             'class' => 'form-control form-control-lg',
-                            'placeholder' => 'Npr. Janez Novak',
+                            'placeholder' => __('e.g. Janez Novak'),
                             'required' => true
                         ]) ?>
                         <small class="text-muted">
-                            <i class="fas fa-info-circle me-1"></i>Vnesite polno ime osebe, ki sodeluje pri delitvi stroškov.
+                            <i class="fas fa-info-circle me-1"></i><?= __('Enter the full name of the person participating in cost sharing.') ?>
                         </small>
                     </div>
 
                     <div class="mb-4">
                         <?= $this->Form->control('email', [
                             'label' => [
-                                'text' => '<i class="fas fa-envelope me-2"></i>E-poštni naslov',
+                                'text' => '<i class="fas fa-envelope me-2"></i>' . __('Email Address'),
                                 'escape' => false,
                                 'class' => 'form-label fw-bold'
                             ],
                             'class' => 'form-control form-control-lg',
-                            'placeholder' => 'janez.novak@example.com',
+                            'placeholder' => __('janez.novak@example.com'),
                             'type' => 'email',
                             'required' => false
                         ]) ?>
                         <small class="text-muted">
-                            <i class="fas fa-info-circle me-1"></i>Opcijsko - e-poštni naslov za obvestila in kontakt.
+                            <i class="fas fa-info-circle me-1"></i><?= __('Optional - email address for notifications and contact.') ?>
                         </small>
                     </div>
 
@@ -54,12 +54,12 @@
 
                     <div class="d-flex gap-2 justify-content-end">
                         <?= $this->Html->link(
-                            '<i class="fas fa-times me-2"></i>Prekliči',
+                            '<i class="fas fa-times me-2"></i>' . __('Cancel'),
                             ['action' => 'index'],
                             ['class' => 'btn btn-secondary', 'escape' => false]
                         ) ?>
                         <?= $this->Form->button(
-                            '<i class="fas fa-save me-2"></i>Posodobi osebo',
+                            '<i class="fas fa-save me-2"></i>' . __('Save Person'),
                             [
                                 'class' => 'btn btn-warning',
                                 'type' => 'submit',
@@ -76,17 +76,17 @@
             <!-- Danger zone -->
             <div class="card border-danger mt-4">
                 <div class="card-header bg-danger text-white">
-                    <h5 class="mb-0"><i class="fas fa-exclamation-triangle me-2"></i>Nevarno območje</h5>
+                    <h5 class="mb-0"><i class="fas fa-exclamation-triangle me-2"></i><?= __('Danger Zone') ?></h5>
                 </div>
                 <div class="card-body">
                     <p class="text-muted mb-3">
-                        <strong>Opozorilo:</strong> Brisanje osebe bo izbrisalo tudi vse povezane stroške, delitve in plačila.
+                        <strong><?= __('Warning:') ?></strong> <?= __('Deleting a person will also delete all related costs, splits, and payments.') ?>
                     </p>
                     <?= $this->Form->postLink(
-                        '<i class="fas fa-trash me-2"></i>Izbriši to osebo',
+                        '<i class="fas fa-trash me-2"></i>' . __('Delete this person'),
                         ['action' => 'delete', $person->id],
                         [
-                            'confirm' => 'Ali ste PREPRIČANI, da želite izbrisati ' . $person->name . '? Vsi povezani podatki bodo izgubljeni!',
+                            'confirm' => __('Are you SURE you want to delete %s? All associated data will be lost!', $person->name),
                             'class' => 'btn btn-danger',
                             'escape' => false,
                             'escapeTitle' => false

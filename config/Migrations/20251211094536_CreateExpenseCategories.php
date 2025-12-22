@@ -11,11 +11,6 @@ class CreateExpenseCategories extends BaseMigration {
             'limit' => 100,
             'null' => false,
         ]);
-        $table->addColumn('name_en', 'string', [
-            'limit' => 100,
-            'null' => false,
-            'comment' => 'English name',
-        ]);
         $table->addColumn('color', 'string', [
             'limit' => 7,
             'null' => false,

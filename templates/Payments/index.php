@@ -1,26 +1,26 @@
 <div class="container-fluid mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1>Evidenca plačil dolgov</h1>
-        <?= $this->Html->link('+ Novo plačilo', ['action' => 'add'], ['class' => 'btn btn-primary']) ?>
+        <h1><?=  __('Payments') ?></h1>
+        <?= $this->Html->link(__('+ New Payment'), ['action' => 'add'], ['class' => 'btn btn-primary']) ?>
     </div>
 
     <div class="card">
         <?php if (empty($payments)): ?>
             <div class="card-body">
-                <p class="text-center text-muted py-5">Še ni evidentiranih plačil</p>
+                <p class="text-center text-muted py-5"><?= __('No payments recorded yet') ?></p>
             </div>
         <?php else: ?>
             <div class="table-responsive">
                 <table class="table table-striped table-hover">
                     <thead class="table-dark">
                         <tr>
-                            <th>Datum</th>
-                            <th>Od</th>
+                            <th><?=  __('Date') ?></th>
+                            <th><?=  __('From') ?></th>
                             <th class="text-center"></th>
-                            <th>Za</th>
-                            <th class="text-end">Znesek</th>
-                            <th>Opombe</th>
-                            <th class="text-center">Akcije</th>
+                            <th><?=  __('To') ?></th>
+                            <th class="text-end"><?=  __('Amount') ?></th>
+                            <th><?=  __('Notes') ?></th>
+                            <th class="text-center"><?= __('Actions') ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,8 +35,8 @@
                                 </td>
                                 <td><?= h($payment->notes) ?></td>
                                 <td class="text-center">
-                                    <?= $this->Form->postLink('Izbriši', ['action' => 'delete', $payment->id], [
-                                        'confirm' => 'Ali ste prepričani?',
+                                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $payment->id], [
+                                        'confirm' => __('Are you sure?'),
                                         'class' => 'btn btn-sm btn-danger'
                                     ]) ?>
                                 </td>
