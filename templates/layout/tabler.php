@@ -1,5 +1,5 @@
 <?php
-$cakeDescription = 'Expense Tracker';
+$cakeDescription = __('Expense Tracker');
 ?>
 <!DOCTYPE html>
 <html lang="<?= \Cake\I18n\I18n::getLocale() === 'en_US' ? 'en' : 'sl' ?>">
