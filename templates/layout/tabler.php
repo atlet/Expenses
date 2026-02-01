@@ -150,29 +150,7 @@ $cakeDescription = __('Expense Tracker');
                             ) ?>
                         </li>
 
-                        <li class="nav-item">
-                            <?= $this->Html->link(
-                                '<span class="nav-link-icon"><i class="ti ti-tag"></i></span>
-                                <span class="nav-link-title">' . __('Categories') . '</span>',
-                                ['controller' => 'ExpenseCategories', 'action' => 'index'],
-                                [
-                                    'class' => 'nav-link' . ($this->request->getParam('controller') === 'ExpenseCategories' ? ' active' : ''),
-                                    'escape' => false
-                                ]
-                            ) ?>
-                        </li>
-
-                        <li class="nav-item">
-                            <?= $this->Html->link(
-                                '<span class="nav-link-icon"><i class="ti ti-building-store"></i></span>
-                                <span class="nav-link-title">' . __('Suppliers') . '</span>',
-                                ['controller' => 'Suppliers', 'action' => 'index'],
-                                [
-                                    'class' => 'nav-link' . ($this->request->getParam('controller') === 'Suppliers' ? ' active' : ''),
-                                    'escape' => false
-                                ]
-                            ) ?>
-                        </li>                        
+                        
 
                         <!-- Payments -->
                         <li class="nav-item">
@@ -187,32 +165,7 @@ $cakeDescription = __('Expense Tracker');
                             ) ?>
                         </li>
 
-                        <!-- Recurring Expenses -->
-                        <li class="nav-item">
-                            <?= $this->Html->link(
-                                '<span class="nav-link-icon"><i class="ti ti-repeat"></i></span>
-                                <span class="nav-link-title">' . __('Recurring Expenses') . '</span>',
-                                ['controller' => 'RecurringExpenses', 'action' => 'index'],
-                                [
-                                    'class' => 'nav-link' . ($this->request->getParam('controller') === 'RecurringExpenses' ? ' active' : ''),
-                                    'escape' => false
-                                ]
-                            ) ?>
-                        </li>
-
-                        <!-- People -->
-                        <li class="nav-item">
-                            <?= $this->Html->link(
-                                '<span class="nav-link-icon"><i class="ti ti-users"></i></span>
-                                <span class="nav-link-title">' . __('People') . '</span>',
-                                ['controller' => 'People', 'action' => 'index'],
-                                [
-                                    'class' => 'nav-link' . ($this->request->getParam('controller') === 'People' ? ' active' : ''),
-                                    'escape' => false
-                                ]
-                            ) ?>
-                        </li>
-
+                        <!-- Statistics -->
                         <li class="nav-item">
                             <?= $this->Html->link(
                                 '<span class="nav-link-icon"><i class="ti ti-chart-line"></i></span>
@@ -225,26 +178,34 @@ $cakeDescription = __('Expense Tracker');
                             ) ?>
                         </li>
 
+                        <!-- Settings -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle <?= $this->request->getParam('controller') === 'Statistics' ? 'show active' : '' ?>"
-                                href="#navbar-reports"
-                                data-bs-toggle="dropdown"
-                                data-bs-auto-close="false"
-                                role="button"
-                                aria-expanded="<?= $this->request->getParam('controller') === 'Statistics' ? 'true' : 'false' ?>">
-                                <span class="nav-link-icon"><i class="ti ti-chart-bar"></i></span>
-                                <span class="nav-link-title"><?= __('Reports') ?></span>
+                            <a class="nav-link dropdown-toggle" href="#navbar-settings" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="false">
+                                <span class="nav-link-icon"><i class="ti ti-settings"></i></span>
+                                <span class="nav-link-title">Nastavitve</span>
                             </a>
-                            <div class="dropdown-menu <?= $this->request->getParam('controller') === 'Statistics' ? 'show' : '' ?>" id="navbar-reports">
+                            <div class="dropdown-menu">
                                 <div class="dropdown-menu-columns">
                                     <div class="dropdown-menu-column">
                                         <?= $this->Html->link(
-                                            '<span class="dropdown-item-icon"><i class="ti ti-chart-line"></i></span>' . __('Statistics'),
-                                            ['controller' => 'Statistics', 'action' => 'index'],
-                                            [
-                                                'class' => 'dropdown-item' . ($this->request->getParam('controller') === 'Statistics' ? ' active' : ''),
-                                                'escape' => false
-                                            ]
+                                            '<span class="dropdown-item-icon"><i class="ti ti-repeat"></i></span>' . __('Recurring Expenses'),
+                                            ['controller' => 'RecurringExpenses', 'action' => 'index'],
+                                            ['class' => 'dropdown-item', 'escape' => false]
+                                        ) ?>
+                                        <?= $this->Html->link(
+                                            '<span class="dropdown-item-icon"><i class="ti ti-users"></i></span>' . __('People'),
+                                            ['controller' => 'People', 'action' => 'index'],
+                                            ['class' => 'dropdown-item', 'escape' => false]
+                                        ) ?>
+                                        <?= $this->Html->link(
+                                            '<span class="dropdown-item-icon"><i class="ti ti-building-store"></i></span>' . __('Suppliers'),
+                                            ['controller' => 'Suppliers', 'action' => 'index'],
+                                            ['class' => 'dropdown-item', 'escape' => false]
+                                        ) ?>
+                                        <?= $this->Html->link(
+                                            '<span class="dropdown-item-icon"><i class="ti ti-tag"></i></span>' . __('Categories'),
+                                            ['controller' => 'ExpenseCategories', 'action' => 'index'],
+                                            ['class' => 'dropdown-item', 'escape' => false]
                                         ) ?>
                                     </div>
                                 </div>
@@ -253,19 +214,7 @@ $cakeDescription = __('Expense Tracker');
 
                         <li class="nav-item-divider"></li>
 
-                        <?php if ($authUser && $authUser->role === 'admin'): ?>
-                            <li class="nav-item">
-                                <?= $this->Html->link(
-                                    '<span class="nav-link-icon"><i class="ti ti-settings"></i></span>
-                                    <span class="nav-link-title">' . __('Settings') . '</span>',
-                                    ['controller' => 'Users', 'action' => 'index'],
-                                    [
-                                        'class' => 'nav-link' . ($this->request->getParam('controller') === 'Users' && $this->request->getParam('action') === 'index' ? ' active' : ''),
-                                        'escape' => false
-                                    ]
-                                ) ?>
-                            </li>
-                        <?php endif; ?>
+
                     </ul>
                 </div>
             </div>
