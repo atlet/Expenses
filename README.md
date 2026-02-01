@@ -1,53 +1,70 @@
-# CakePHP Application Skeleton
+# Expenses
 
-![Build Status](https://github.com/cakephp/app/actions/workflows/ci.yml/badge.svg?branch=5.x)
-[![Total Downloads](https://img.shields.io/packagist/dt/cakephp/app.svg?style=flat-square)](https://packagist.org/packages/cakephp/app)
-[![PHPStan](https://img.shields.io/badge/PHPStan-level%208-brightgreen.svg?style=flat-square)](https://github.com/phpstan/phpstan)
+An application for tracking personal and business expenses, built with the CakePHP 5.2 framework.
 
-A skeleton for creating applications with [CakePHP](https://cakephp.org) 5.x.
+## Overview
 
-The framework source code can be found here: [cakephp/cakephp](https://github.com/cakephp/cakephp).
+"Expenses" enables accurate recording and analysis of financial outflows. It is designed for easy data entry and clear reporting.
+
+### Key Features
+
+*   **Expense Tracking**: Record one-time and recurring expenses.
+*   **Categorization**: Organize expenses by categories for better transparency.
+*   **Splits**: Ability to split expenses (e.g., between multiple people or departments).
+*   **People Management**: Manage users and people associated with expenses.
+*   **Attachments**: Store and manage proofs of purchase (invoices) with expenses.
+*   **Statistics**: Comprehensive Dashboard and expense reports.
+
+## Technologies
+
+*   **PHP**: 8.1+
+*   **Framework**: CakePHP 5.2
+*   **Database**: MySQL / MariaDB
+*   **Authentication**: CakePHP Authentication plugin
 
 ## Installation
 
-1. Download [Composer](https://getcomposer.org/doc/00-intro.md) or update `composer self-update`.
-2. Run `php composer.phar create-project --prefer-dist cakephp/app [app_name]`.
+To run the project locally, follow these steps:
 
-If Composer is installed globally, run
+1.  **Clone the Repository**
+    ```bash
+    git clone <repository-url>
+    cd expenses
+    ```
 
-```bash
-composer create-project --prefer-dist cakephp/app
-```
+2.  **Install Dependencies**
+    Use Composer to install the required libraries:
+    ```bash
+    composer install
+    ```
 
-In case you want to use a custom app dir name (e.g. `/myapp/`):
+3.  **Configuration**
+    Copy the configuration template and edit the database settings:
+    ```bash
+    cp config/app_local.example.php config/app_local.php
+    ```
+    In `config/app_local.php`, set your MySQL database access details (host, username, password, database).
 
-```bash
-composer create-project --prefer-dist cakephp/app myapp
-```
+4.  **Database**
+    Run migrations to set up the database structure:
+    ```bash
+    bin/cake migrations migrate
+    ```
 
-You can now either use your machine's webserver to view the default home page, or start
-up the built-in webserver with:
+5.  **Start Server**
+    For development, you can use the built-in PHP server:
+    ```bash
+    bin/cake server
+    ```
+    The application will be accessible at `http://localhost:8765`.
 
-```bash
-bin/cake server -p 8765
-```
+## Project Structure
 
-Then visit `http://localhost:8765` to see the welcome page.
+*   `src/Controller`: Controllers for managing logic (Expenses, Categories, Users, ...).
+*   `src/Model`: Data models and validation.
+*   `templates`: Views for the application's presentation layer.
+*   `tests`: Application tests.
 
-## Update
+## License
 
-Since this skeleton is a starting point for your application and various files
-would have been modified as per your needs, there isn't a way to provide
-automated upgrades, so you have to do any updates manually.
-
-## Configuration
-
-Read and edit the environment specific `config/app_local.php` and set up the
-`'Datasources'` and any other configuration relevant for your application.
-Other environment agnostic settings can be changed in `config/app.php`.
-
-## Layout
-
-The app skeleton uses [Milligram](https://milligram.io/) (v1.3) minimalist CSS
-framework by default. You can, however, replace it with any other library or
-custom styles.
+This project is based on the CakePHP framework and is licensed under the MIT License.
