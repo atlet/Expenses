@@ -184,7 +184,7 @@ $cakeDescription = __('Expense Tracker');
                                 <span class="nav-link-icon"><i class="ti ti-settings"></i></span>
                                 <span class="nav-link-title">Nastavitve</span>
                             </a>
-                            <div class="dropdown-menu">
+                            <div class="dropdown-menu" id="navbar-settings">
                                 <div class="dropdown-menu-columns">
                                     <div class="dropdown-menu-column">
                                         <?= $this->Html->link(
@@ -225,7 +225,10 @@ $cakeDescription = __('Expense Tracker');
             <div class="page-body">
                 <div class="container-fluid">
                     <!-- Flash Messages -->
-                    <?= $this->Flash->render() ?>
+                    <!-- Flash Messages -->
+                    <div id="flash-container">
+                        <?= $this->Flash->render() ?>
+                    </div>
 
                     <!-- Page Content -->
                     <?= $this->fetch('content') ?>
@@ -271,21 +274,24 @@ $cakeDescription = __('Expense Tracker');
             const toggler = document.getElementById('navbar-toggler');
             const sidebar = document.getElementById('sidebar');
             const backdrop = document.getElementById('navbar-backdrop');
+            const menu = document.getElementById('navbar-menu');
 
             if (toggler && sidebar && backdrop) {
                 toggler.addEventListener('click', function() {
                     sidebar.classList.toggle('show');
                     backdrop.classList.toggle('show');
+                    if (menu) menu.classList.toggle('show');
                 });
 
                 backdrop.addEventListener('click', function() {
                     sidebar.classList.remove('show');
                     backdrop.classList.remove('show');
+                    if (menu) menu.classList.remove('show');
                 });
             }
 
             // Auto-hide flash messages after 5 seconds
-            const flashMessages = document.querySelectorAll('.flash-message, .alert');
+            const flashMessages = document.querySelectorAll('#flash-container .flash-message, #flash-container .alert');
             flashMessages.forEach(function(message) {
                 setTimeout(function() {
                     message.style.animation = 'slideOutRight 0.3s ease-out';
