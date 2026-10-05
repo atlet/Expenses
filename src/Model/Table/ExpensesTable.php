@@ -58,7 +58,7 @@ class ExpensesTable extends Table {
             ->decimal('amount')
             ->requirePresence('amount', 'create')
             ->notEmptyString('amount')
-            ->greaterThan('amount', 0);
+            ->greaterThanOrEqual('amount', 0);
 
         $validator
             ->decimal('commission')

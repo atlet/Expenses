@@ -1,5 +1,9 @@
 # Expenses
 
+## One-time Ledger history import
+
+Run `php bin/import-ledger.php` to replace the local SQLite expense and payment history with all transactions from `/home/atlet/Nextcloud/Podjetje/stroski-pisarne.ledger`. You can pass another Ledger file path as the first argument. The command validates and reports counts before writing, creates a timestamped `db/*.bak` SQLite backup, and imports everything in one database transaction. Re-running it replaces the imported history rather than duplicating it. People, categories, and suppliers remain in place. Ledger's `Iztok` maps to the existing `Izak` person.
+
 An application for tracking personal and business expenses, built with the CakePHP 5.2 framework.
 
 ## Overview

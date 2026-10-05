@@ -52,3 +52,4 @@ nbproject/*
 yarn-debug.log
 yarn-error.log
 db/app.sqlite
+/db/*.bak
