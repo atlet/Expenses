@@ -41,6 +41,7 @@
                         </h5>
                     </div>
                     <div class="card-body">
+                        <?php if (!$recurring->is_active): ?><span>Neaktiven</span><?php endif; ?>
                         <p class="mb-2">
                             <strong><?= __('Amount:') ?></strong> <?= number_format($recurring->amount, 2) ?> €
                             + <?= number_format($recurring->commission, 2) ?> € <?= __('commission') ?>
@@ -68,6 +69,7 @@
                         <?php endif; ?>
 
                         <div class="d-flex gap-2 mt-3">
+                            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $recurring->id], ['class' => 'btn btn-secondary btn-sm']) ?>
                             <?= $this->Form->postLink(
                                 __('Add now'),
                                 ['action' => 'createExpense', $recurring->id],

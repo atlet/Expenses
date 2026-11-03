@@ -35,6 +35,7 @@ class RecurringExpense extends Entity {
      */
     protected array $_accessible = [
         'title' => true,
+        'expense_category_id' => true,
         'amount' => true,
         'commission' => true,
         'day_of_month' => true,

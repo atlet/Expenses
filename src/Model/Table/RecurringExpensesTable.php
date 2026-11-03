@@ -17,6 +17,8 @@ class RecurringExpensesTable extends Table {
 
         $this->addBehavior('Timestamp');
 
+        $this->belongsTo('ExpenseCategories', ['foreignKey' => 'expense_category_id']);
+
         $this->belongsTo('PaidBy', [
             'className' => 'People',
             'foreignKey' => 'paid_by_id',
@@ -25,6 +27,7 @@ class RecurringExpensesTable extends Table {
         $this->hasMany('RecurringExpenseSplits', [
             'foreignKey' => 'recurring_expense_id',
             'dependent' => true,
+            'saveStrategy' => 'replace',
         ]);
     }
 
@@ -53,7 +56,7 @@ class RecurringExpensesTable extends Table {
             ->integer('day_of_month')
             ->requirePresence('day_of_month', 'create')
             ->notEmptyString('day_of_month')
-            ->range('day_of_month', [1, 28]);
+            ->range('day_of_month', [1, 31]);
 
         $validator
             ->date('last_added_date')

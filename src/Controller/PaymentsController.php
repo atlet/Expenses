@@ -6,9 +6,10 @@ namespace App\Controller;
 
 class PaymentsController extends AppController {
     public function index() {
-        $payments = $this->Payments->find('all')
+        $query = $this->Payments->find('all')
             ->contain(['FromPerson', 'ToPerson'])
-            ->order(['Payments.payment_date' => 'DESC']);
+            ->orderBy(['Payments.payment_date' => 'DESC', 'Payments.id' => 'DESC']);
+        $payments = $this->paginate($query, ['limit' => 25, 'maxLimit' => 100]);
 
         $this->set(compact('payments'));
     }

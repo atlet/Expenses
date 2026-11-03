@@ -72,3 +72,19 @@ To run the project locally, follow these steps:
 ## License
 
 This project is based on the CakePHP framework and is licensed under the MIT License.
+
+## Automatic recurring expenses
+
+Run `bin/cake recurring_expenses generate` daily. Active templates generate at most
+one expense per calendar month in Europe/Ljubljana. Missed runs catch up only the
+current month; days 29–31 fall on the last day in shorter months. Manual generation
+also counts toward the monthly limit. Editing a template does not change history.
+
+Example crontab (server timezone Europe/Ljubljana; adjust PHP and project paths):
+
+```cron
+0 6 * * * cd /home/atlet/Projekti/stroski && /usr/bin/php bin/cake.php recurring_expenses generate >> logs/recurring-expenses.log 2>&1
+```
+
+The command reports added/skipped counts and errors, and exits nonzero on errors.
+Install this entry on the application server under the application user.

@@ -1,9 +1,19 @@
 <div class="container mt-4">
-    <h1 class="mb-4"><?= __('New Recurring Expense') ?></h1>
+    <h1 class="mb-4"><?= $recurringExpense->isNew() ? __('New Recurring Expense') : __('Edit Recurring Expense') ?></h1>
 
     <div class="card">
         <div class="card-body">
             <?= $this->Form->create($recurringExpense) ?>
+
+            <div class="mb-3">
+                <?= $this->Form->control('expense_category_id', [
+                    'label' => __('Category'),
+                    'options' => $categories,
+                    'empty' => __('Select category'),
+                    'class' => 'form-select',
+                    'required' => false,
+                ]) ?>
+            </div>
 
             <div class="row">
                 <div class="col-md-6 mb-3">
@@ -62,7 +72,7 @@
                                     'value' => $id,
                                     'id' => "split-{$id}",
                                     'class' => 'form-check-input',
-                                    'checked' => true
+                                    'checked' => $this->request->is(['post', 'put', 'patch']) ? in_array($id, $this->request->getData('split_people', [])) : ($recurringExpense->isNew() || in_array($id, array_column($recurringExpense->recurring_expense_splits, 'person_id')))
                                 ]) ?>
                                 <label class="form-check-label" for="split-<?= $id ?>">
                                     <?= h($name) ?>
@@ -73,6 +83,7 @@
                 </div>
             </div>
 
+            <?= $this->Form->control('is_active', ['label' => __('Active'), 'default' => true]) ?>
             <div class="d-flex gap-2">
                 <?= $this->Form->button(__('Save'), ['class' => 'btn btn-warning']) ?>
                 <?= $this->Html->link(__('Cancel'), ['action' => 'index'], ['class' => 'btn btn-secondary']) ?>

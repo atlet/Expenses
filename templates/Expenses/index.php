@@ -1,3 +1,14 @@
+<?php
+$this->Paginator->setTemplates([
+    'number' => '<li class="page-item"><a class="page-link" href="{{url}}">{{text}}</a></li>',
+    'current' => '<li class="page-item active" aria-current="page"><span class="page-link">{{text}}</span></li>',
+    'prevActive' => '<li class="page-item"><a class="page-link" rel="prev" href="{{url}}" aria-label="Prejšnja stran">{{text}}</a></li>',
+    'nextActive' => '<li class="page-item"><a class="page-link" rel="next" href="{{url}}" aria-label="Naslednja stran">{{text}}</a></li>',
+    'prevDisabled' => '<li class="page-item disabled"><span class="page-link" aria-disabled="true" aria-label="Prejšnja stran">{{text}}</span></li>',
+    'nextDisabled' => '<li class="page-item disabled"><span class="page-link" aria-disabled="true" aria-label="Naslednja stran">{{text}}</span></li>',
+    'ellipsis' => '<li class="page-item disabled"><span class="page-link">&hellip;</span></li>',
+]);
+?>
 <div class="container-fluid mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1><i class="fas fa-file-invoice-dollar me-2"></i><?= __('Expenses') ?></h1>
@@ -8,11 +19,28 @@
         ) ?>
     </div>
 
+    <div class="card card-body mb-4">
+        <?= $this->Form->create(null, ['type' => 'get', 'url' => ['action' => 'index']]) ?>
+        <div class="row g-3 align-items-end">
+            <?php foreach (['date_from' => 'Datum od', 'date_to' => 'Datum do'] as $key => $label): ?>
+                <div class="col-md-2"><?= $this->Form->control($key, ['type' => 'date', 'label' => $label, 'value' => $filters[$key] ?? '', 'class' => 'form-control']) ?></div>
+            <?php endforeach; ?>
+            <?php foreach (['expense_category_id' => ['Kategorija', $categories], 'supplier_id' => ['Dobavitelj', $suppliers], 'paid_by_id' => ['Plačal', $people], 'status' => ['Status', ['paid' => __('Paid'), 'unpaid' => __('Unpaid')]]] as $key => [$label, $options]): ?>
+                <div class="col-md-2"><?= $this->Form->control($key, ['type' => 'select', 'label' => $label, 'options' => $options, 'empty' => 'Vsi', 'value' => $filters[$key] ?? '', 'class' => 'form-select']) ?></div>
+            <?php endforeach; ?>
+            <div class="col-12 d-flex gap-2">
+                <?= $this->Form->button('Filtriraj', ['class' => 'btn btn-primary']) ?>
+                <?= $this->Html->link('Počisti filtre', ['action' => 'index'], ['class' => 'btn btn-secondary']) ?>
+            </div>
+        </div>
+        <?= $this->Form->end() ?>
+    </div>
+
     <?php if (empty($expenses->toArray())): ?>
         <div class="alert alert-info text-center py-5">
             <i class="fas fa-inbox fa-3x mb-3 d-block text-muted"></i>
-            <h4><?= __('No expenses yet') ?></h4>
-            <p class="mb-4"><?= __('Start by adding your first expense') ?></p>
+            <h4><?= __('Ni stroškov za izbrane filtre') ?></h4>
+            <p class="mb-4"><?= __('Spremenite ali počistite filtre.') ?></p>
             <?= $this->Html->link(
                 '<i class="fas fa-plus-circle me-2"></i>' . __('Add First Expense'),
                 ['action' => 'add'],
@@ -144,16 +172,10 @@
                     </tbody>
                     <tfoot class="table-light">
                         <tr>
-                            <td colspan="6" class="text-end"><strong><?= __('Total') ?>:</strong></td>
+                            <td colspan="6" class="text-end"><strong>Skupaj po filtrih:</strong></td>
                             <td class="text-end">
                                 <strong class="text-primary fs-5">
-                                    <?php
-                                    $total = 0;
-                                    foreach ($expenses as $expense) {
-                                        $total += $expense->amount + $expense->commission;
-                                    }
-                                    echo number_format($total, 2);
-                                    ?> €
+                                    <?= number_format((float)$filteredTotal, 2) ?> €
                                 </strong>
                             </td>
                             <td colspan="4"></td>
@@ -162,6 +184,14 @@
                 </table>
             </div>
         </div>
+        <nav class="mt-3 d-flex flex-wrap justify-content-between align-items-center gap-3" aria-label="Strani stroškov">
+            <ul class="pagination mb-0">
+                <?= $this->Paginator->prev('‹') ?>
+                <?= $this->Paginator->numbers(['modulus' => 5, 'first' => 1, 'last' => 1]) ?>
+                <?= $this->Paginator->next('›') ?>
+            </ul>
+            <p class="text-muted mb-0"><?= $this->Paginator->counter('Stran {{page}} od {{pages}} · {{count}} stroškov') ?></p>
+        </nav>
     <?php endif; ?>
 </div>
 

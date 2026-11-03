@@ -10,11 +10,11 @@ class RecurringExpensesController extends AppController {
     public function index() {
         $recurringExpenses = $this->RecurringExpenses->find('all')
             ->contain(['PaidBy', 'RecurringExpenseSplits.People'])
-            ->where(['is_active' => true]);
+            ->orderBy(['RecurringExpenses.title' => 'ASC']);
 
         // Preveri, kateri stroški potrebujejo opomnik
         $reminders = [];
-        $today = FrozenDate::now();
+        $today = new \Cake\I18n\Date((new \DateTimeImmutable('today', new \DateTimeZone('Europe/Ljubljana')))->format('Y-m-d'));
 
         foreach ($recurringExpenses as $recurring) {
             $needsReminder = false;
@@ -24,13 +24,13 @@ class RecurringExpensesController extends AppController {
                 // Če ni bil dodan ta mesec
                 if ($lastAdded->month != $today->month || $lastAdded->year != $today->year) {
                     // In če je že prešel dan v mesecu
-                    if ($today->day >= $recurring->day_of_month) {
+                    if ($recurring->is_active && $today->day >= min($recurring->day_of_month, (int)$today->format('t'))) {
                         $needsReminder = true;
                     }
                 }
             } else {
                 // Še nikoli ni bil dodan
-                if ($today->day >= $recurring->day_of_month) {
+                if ($recurring->is_active && $today->day >= min($recurring->day_of_month, (int)$today->format('t'))) {
                     $needsReminder = true;
                 }
             }
@@ -51,7 +51,7 @@ class RecurringExpensesController extends AppController {
             // Pripravi recurring expense splits
             $splitPeople = $data['split_people'] ?? [];
             $splits = [];
-            foreach ($splitPeople as $personId) {
+            foreach (array_unique(array_filter($splitPeople)) as $personId) {
                 $splits[] = [
                     'person_id' => $personId
                 ];
@@ -70,7 +70,32 @@ class RecurringExpensesController extends AppController {
         }
 
         $people = $this->RecurringExpenses->PaidBy->find('list');
-        $this->set(compact('recurringExpense', 'people'));
+        $categories = $this->RecurringExpenses->ExpenseCategories->find('list')->where(['is_active' => true])->orderBy(['sort_order' => 'ASC']);
+        $this->set(compact('recurringExpense', 'people', 'categories'));
+    }
+
+    public function edit($id = null) {
+        $recurringExpense = $this->RecurringExpenses->get($id, contain: ['RecurringExpenseSplits']);
+        if ($this->request->is(['post', 'put', 'patch'])) {
+            $data = $this->request->getData();
+            $data['recurring_expense_splits'] = array_map(
+                fn($id) => ['person_id' => $id],
+                array_values(array_unique(array_filter($data['split_people'] ?? [])))
+            );
+            $this->RecurringExpenses->patchEntity($recurringExpense, $data, [
+                'fields' => ['expense_category_id', 'title', 'amount', 'commission', 'day_of_month', 'paid_by_id', 'is_active', 'recurring_expense_splits'],
+                'associated' => ['RecurringExpenseSplits'],
+            ]);
+            if ($this->RecurringExpenses->save($recurringExpense)) {
+                $this->Flash->success(__('Saved.'));
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('Please check the entered values.'));
+        }
+        $people = $this->RecurringExpenses->PaidBy->find('list');
+        $categories = $this->RecurringExpenses->ExpenseCategories->find('list')->where(['is_active' => true])->orderBy(['sort_order' => 'ASC']);
+        $this->set(compact('recurringExpense', 'people', 'categories'));
+        $this->render('add');
     }
 
     public function createExpense($id = null) {
@@ -78,40 +103,10 @@ class RecurringExpensesController extends AppController {
 
         $recurringExpense = $this->RecurringExpenses->get($id, contain: ['RecurringExpenseSplits']);
 
-        // Ustvari nov expense iz recurring expense
-        $expenseData = [
-            'title' => $recurringExpense->title,
-            'amount' => $recurringExpense->amount,
-            'commission' => $recurringExpense->commission,
-            'expense_date' => FrozenDate::now(),
-            'paid_by_id' => $recurringExpense->paid_by_id,
-        ];
-
-        // Dodaj expense splits
-        $shareRatio = count($recurringExpense->recurring_expense_splits) > 0
-            ? 1 / count($recurringExpense->recurring_expense_splits)
-            : 0;
-
-        $expenseSplits = [];
-        foreach ($recurringExpense->recurring_expense_splits as $split) {
-            $expenseSplits[] = [
-                'person_id' => $split->person_id,
-                'share_ratio' => $shareRatio
-            ];
-        }
-        $expenseData['expense_splits'] = $expenseSplits;
-
-        $expense = $this->RecurringExpenses->PaidBy->Expenses->newEntity($expenseData, [
-            'associated' => ['ExpenseSplits']
-        ]);
-
-        if ($this->RecurringExpenses->PaidBy->Expenses->save($expense)) {
-            // Posodobi last_added_date
-            $recurringExpense->last_added_date = FrozenDate::now();
-            $this->RecurringExpenses->save($recurringExpense);
-
-            $this->Flash->success(__('The expense has been added from the recurring expense.'));
-        } else {
+        try {
+            $added = (new \App\Service\RecurringExpenseGenerator())->generate((int)$id, false);
+            $this->Flash->success($added ? __('The expense has been added from the recurring expense.') : __('Already added this month.'));
+        } catch (\Throwable $e) {
             $this->Flash->error(__('The expense could not be added. Please try again.'));
         }
 

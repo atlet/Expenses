@@ -6,11 +6,42 @@ namespace App\Controller;
 
 class ExpensesController extends AppController {
     public function index() {
-        $expenses = $this->Expenses->find('all')
-            ->contain(['PaidBy', 'ExpenseSplits.People', 'ExpenseCategories', 'Suppliers'])
-            ->order(['Expenses.expense_date' => 'DESC']);
-
-        $this->set(compact('expenses'));
+        $filters = [];
+        $query = $this->Expenses->find('all')
+            ->contain(['PaidBy', 'ExpenseSplits.People', 'ExpenseCategories', 'Suppliers']);
+        foreach (['date_from' => '>=', 'date_to' => '<='] as $key => $operator) {
+            $value = $this->request->getQuery($key);
+            if (is_string($value)) {
+                $date = \DateTimeImmutable::createFromFormat('!Y-m-d', $value);
+                if ($date && $date->format('Y-m-d') === $value) {
+                    $filters[$key] = $value;
+                    $query->where(["Expenses.expense_date $operator" => $value]);
+                }
+            }
+        }
+        foreach (['expense_category_id', 'supplier_id', 'paid_by_id'] as $key) {
+            $value = $this->request->getQuery($key);
+            if (is_string($value) && ctype_digit($value) && (int)$value > 0) {
+                $filters[$key] = $value;
+                $query->where(['Expenses.' . $key => (int)$value]);
+            }
+        }
+        $status = $this->request->getQuery('status');
+        if (in_array($status, ['paid', 'unpaid'], true)) {
+            $filters['status'] = $status;
+            $query->where(['Expenses.is_paid' => $status === 'paid']);
+        }
+        $totalQuery = clone $query;
+        $totalRow = $totalQuery->contain([], true)->select([
+            'total' => $totalQuery->func()->sum('Expenses.amount + Expenses.commission'),
+        ])->enableHydration(false)->first();
+        $filteredTotal = $totalRow['total'] ?? 0;
+        $query->orderBy(['Expenses.expense_date' => 'DESC', 'Expenses.id' => 'DESC']);
+        $expenses = $this->paginate($query, ['limit' => 25, 'maxLimit' => 100]);
+        $categories = $this->Expenses->ExpenseCategories->find('list')->orderBy(['name' => 'ASC'])->all();
+        $suppliers = $this->Expenses->Suppliers->find('list')->orderBy(['name' => 'ASC'])->all();
+        $people = $this->Expenses->PaidBy->find('list')->orderBy(['name' => 'ASC'])->all();
+        $this->set(compact('expenses', 'filters', 'categories', 'suppliers', 'people', 'filteredTotal'));
     }
 
     public function view($id = null) {
