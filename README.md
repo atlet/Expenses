@@ -85,6 +85,15 @@ Run `bin/cake recurring_expenses generate` daily. Active templates generate at m
 one expense per calendar month in Europe/Ljubljana. Missed runs catch up only the
 current month; days 29–31 fall on the last day in shorter months. Manual generation
 also counts toward the monthly limit. Editing a template does not change history.
+The monthly limit checks the actual linked expense: deleting it allows generation
+again. Deleting a template preserves its expense history.
+
+After updating, run the database migrations and clear the model cache before
+serving requests (`make migrate` and `make cache-clear` for Docker installations).
+Older expenses are linked when generation finds exactly one matching expense for
+the current month's last-added/due date, title, amount, commission and payer.
+Ambiguous matches are reported for manual review and do not create new expenses;
+no matching expense allows generation even when the old last-added date is set.
 
 Example crontab (server timezone Europe/Ljubljana; adjust PHP and project paths):
 

@@ -24,6 +24,10 @@ class RecurringExpensesTable extends Table {
             'foreignKey' => 'paid_by_id',
             'joinType' => 'INNER',
         ]);
+        $this->hasMany('Expenses', [
+            'foreignKey' => 'recurring_expense_id',
+            'dependent' => false,
+        ]);
         $this->hasMany('RecurringExpenseSplits', [
             'foreignKey' => 'recurring_expense_id',
             'dependent' => true,

@@ -275,7 +275,7 @@ try {
                     // SQLite retains the precision needed to preserve explicit cent amounts.
                     $ratio = $transaction['shares'] !== []
                         ? sprintf('%.15f', $transaction['shares'][$name] / ($transaction['amount'] + $transaction['commission']))
-                        : (count($splitNames) === 3 ? '0.3333' : '0.5000');
+                        : sprintf('%.15f', 1 / count($splitNames));
                     $splitStmt->bindValue(':ratio', $ratio, SQLITE3_TEXT);
                     $splitStmt->execute();
                 }

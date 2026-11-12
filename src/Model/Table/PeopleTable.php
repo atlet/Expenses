@@ -55,94 +55,13 @@ class PeopleTable extends Table {
     }
 
     public function getBalances(): array {
-        /** @var \Cake\Database\Connection $conn */
-        $conn = $this->getConnection();
-
-        $sql = <<<SQL
-WITH stanje AS (
-    SELECT
-      p.id,
-      p.name,
-      ROUND(
-        SUM(es.share_ratio * (e.amount + e.commission)),
-        2
-      ) AS owes,
-      COALESCE(
-        (
-          SELECT
-            ROUND(SUM(amount + commission), 2)
-          FROM
-            expenses
-          WHERE
-            paid_by_id = p.id
-        ),
-        0
-      ) AS paid,
-      (
-        SELECT
-          COALESCE(
-            ROUND(
-              SUM(ess.share_ratio * (ee.amount + ee.commission)),
-              2
-            ),
-            0
-          )
-        FROM
-          expenses ee
-          LEFT JOIN expense_splits ess ON ess.expense_id = ee.id
-        WHERE
-          ee.paid_by_id = p.id
-          AND ess.person_id != p.id
-      ) AS terjatev,
-      (
-        SELECT
-          COALESCE(
-            ROUND(
-              SUM(ess.share_ratio * (ee.amount + ee.commission)),
-              2
-            ),
-            0
-          )
-        FROM
-          expenses ee
-          LEFT JOIN expense_splits ess ON ess.expense_id = ee.id
-        WHERE
-          ess.person_id = p.id
-          AND ee.paid_by_id != p.id
-      ) AS dolg,
-      (
-        SELECT
-          COALESCE(ROUND(SUM(pp.amount), 2), 0)
-        FROM
-          payments pp
-        WHERE
-          pp.from_person_id = p.id
-      ) AS placaldolg,
-      (
-        SELECT
-          COALESCE(ROUND(SUM(pp.amount), 2), 0)
-        FROM
-          payments pp
-        WHERE
-          pp.to_person_id = p.id
-      ) AS prejel
-    FROM
-      people p
-      LEFT JOIN expense_splits es ON es.person_id = p.id
-      LEFT JOIN expenses e ON e.id = es.expense_id
-    GROUP BY
-      p.id
-)
-SELECT 
-  id,
-  name,
-  paid,
-  owes,
-  (terjatev - dolg - prejel + placaldolg) balance
-FROM stanje s
-SQL;
-
-        return $conn->execute($sql)->fetchAll('assoc');
+        return array_map(static fn(array $row): array => [
+            'id' => $row['id'],
+            'name' => $row['name'],
+            'paid' => $row['paid_expenses'],
+            'owes' => $row['should_pay'],
+            'balance' => $row['net'],
+        ], $this->getNetBalances());
     }
 
     public function getNetBalances(): array {
@@ -156,7 +75,13 @@ WITH per_person AS (
 
         -- koliko bi morali pravično plačati
         COALESCE(
-            ROUND(SUM(es.share_ratio * (e.amount + e.commission)), 2),
+            ROUND(SUM(
+                1.0 * es.share_ratio / NULLIF((
+                    SELECT SUM(all_splits.share_ratio)
+                    FROM expense_splits all_splits
+                    WHERE all_splits.expense_id = e.id
+                ), 0) * (e.amount + e.commission)
+            ), 2),
             0
         ) AS should_pay,
 

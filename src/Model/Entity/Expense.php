@@ -13,6 +13,8 @@ use Cake\ORM\Entity;
  * @property string $amount
  * @property string $commission
  * @property \Cake\I18n\Date $expense_date
+ * @property int|null $recurring_expense_id
+ * @property \Cake\I18n\Date|null $recurrence_month
  * @property int $paid_by_id
  * @property string|null $notes
  * @property \Cake\I18n\DateTime $created

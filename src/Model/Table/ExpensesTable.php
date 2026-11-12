@@ -17,6 +17,11 @@ class ExpensesTable extends Table {
 
         $this->addBehavior('Timestamp');
 
+        $this->belongsTo('RecurringExpenses', [
+            'foreignKey' => 'recurring_expense_id',
+            'joinType' => 'LEFT',
+        ]);
+
         $this->belongsTo('PaidBy', [
             'className' => 'People',
             'foreignKey' => 'paid_by_id',

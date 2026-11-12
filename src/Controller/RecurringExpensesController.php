@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use Cake\I18n\FrozenDate;
+use App\Service\RecurringExpenseGenerator;
 
 class RecurringExpensesController extends AppController {
     public function index() {
@@ -12,30 +12,11 @@ class RecurringExpensesController extends AppController {
             ->contain(['PaidBy', 'RecurringExpenseSplits.People'])
             ->orderBy(['RecurringExpenses.title' => 'ASC']);
 
-        // Preveri, kateri stroški potrebujejo opomnik
         $reminders = [];
-        $today = new \Cake\I18n\Date((new \DateTimeImmutable('today', new \DateTimeZone('Europe/Ljubljana')))->format('Y-m-d'));
-
+        $generator = new RecurringExpenseGenerator();
+        $today = $generator->today();
         foreach ($recurringExpenses as $recurring) {
-            $needsReminder = false;
-
-            if ($recurring->last_added_date) {
-                $lastAdded = $recurring->last_added_date;
-                // Če ni bil dodan ta mesec
-                if ($lastAdded->month != $today->month || $lastAdded->year != $today->year) {
-                    // In če je že prešel dan v mesecu
-                    if ($recurring->is_active && $today->day >= min($recurring->day_of_month, (int)$today->format('t'))) {
-                        $needsReminder = true;
-                    }
-                }
-            } else {
-                // Še nikoli ni bil dodan
-                if ($recurring->is_active && $today->day >= min($recurring->day_of_month, (int)$today->format('t'))) {
-                    $needsReminder = true;
-                }
-            }
-
-            if ($needsReminder) {
+            if ($generator->needsReminder($recurring, $today)) {
                 $reminders[] = $recurring->id;
             }
         }
@@ -103,9 +84,16 @@ class RecurringExpensesController extends AppController {
 
         $recurringExpense = $this->RecurringExpenses->get($id, contain: ['RecurringExpenseSplits']);
 
+        if (!$recurringExpense->is_active) {
+            $this->Flash->error('Ponavljajoči strošek je neaktiven. Pred dodajanjem ga aktivirajte.');
+            return $this->redirect(['action' => 'index']);
+        }
+
         try {
-            $added = (new \App\Service\RecurringExpenseGenerator())->generate((int)$id, false);
+            $added = (new RecurringExpenseGenerator())->generate((int)$id, false);
             $this->Flash->success($added ? __('The expense has been added from the recurring expense.') : __('Already added this month.'));
+        } catch (\DomainException $e) {
+            $this->Flash->error($e->getMessage());
         } catch (\Throwable $e) {
             $this->Flash->error(__('The expense could not be added. Please try again.'));
         }
