@@ -1,0 +1,23 @@
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      SECURITY_SALT: ${SECURITY_SALT:?Run make init to generate SECURITY_SALT}
+    ports:
+      - "${HTTP_BIND_IP:-127.0.0.1}:${HTTP_PORT:-8080}:8080"
+    volumes:
+      - ${DB_DIR:-./db}:/app/db
+      - ${STORAGE_DIR:-./storage}:/app/storage
+      - ${LOG_DIR:-./logs}:/app/logs
+      - runtime:/app/tmp
+    healthcheck:
+      test: ["CMD", "php", "-r", "$$h = get_headers('http://127.0.0.1:8080/users/login'); exit($$h && str_contains($$h[0], '200') ? 0 : 1);"]
+      interval: 30s
+      timeout: 10s
+      start_period: 20s
+      retries: 3
+    stop_grace_period: 30s
+volumes:
+  runtime:

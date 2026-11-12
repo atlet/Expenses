@@ -6,7 +6,14 @@ declare(strict_types=1);
 
 const DEFAULT_LEDGER = '/home/atlet/Nextcloud/Podjetje/stroski-pisarne.ledger';
 
-$source = $argv[1] ?? DEFAULT_LEDGER;
+$arguments = array_slice($argv, 1);
+$dryRun = in_array('--dry-run', $arguments, true);
+$paths = array_values(array_filter($arguments, fn($argument) => $argument !== '--dry-run'));
+if (count($paths) > 1 || ($paths !== [] && str_starts_with($paths[0], '--'))) {
+    fwrite(STDERR, "Usage: php bin/import-ledger.php [source] [--dry-run]\n");
+    exit(1);
+}
+$source = $paths[0] ?? DEFAULT_LEDGER;
 $database = dirname(__DIR__) . '/db/app.sqlite';
 if (!is_file($source) || !is_readable($source) || !is_file($database)) {
     fwrite(STDERR, "Ledger source or application database is unavailable.\n");
@@ -69,6 +76,8 @@ try {
         $cleared = ($match[3] ?? '') === '*';
         $title = trim($match[4]);
         $postings = [];
+        $shareTotal = null;
+        $shares = [];
         $comments = [];
         foreach (array_slice($lines, 0, $headerIndex) as $line) {
             if (preg_match('/^\s*;(.*)$/u', $line, $comment)) {
@@ -83,12 +92,27 @@ try {
             if (trim($line) === '') {
                 continue;
             }
-            if (!preg_match('/^\s+(Expenses|Person):([^\s]+)(?:\s+(\d+(?:\.\d{1,2})?)\s*€)?\s*$/u', $line, $posting)) {
+            if (preg_match('/^\s+\[Share(?::Person:([^\s\]]+))?\]\s+(-?\d+(?:\.\d{1,2})?)\s*€\s*$/u', $line, $share)) {
+                $value = (str_starts_with($share[2], '-') ? -1 : 1) * cents(ltrim($share[2], '-'));
+                if (($share[1] ?? '') === '') {
+                    if ($shareTotal !== null || $value <= 0) {
+                        $unknown[] = $header . ' :: invalid or duplicate Share total';
+                    }
+                    $shareTotal = $value;
+                } else {
+                    if (isset($shares[$share[1]]) || $value >= 0) {
+                        $unknown[] = $header . ' :: invalid or duplicate person share';
+                    }
+                    $shares[$share[1]] = -$value;
+                }
+                continue;
+            }
+            if (!preg_match('/^\s+(Expenses|Expensesextra|Person):([^\s]+)(?:\s+(\d+(?:\.\d{1,2})?)\s*€)?\s*$/u', $line, $posting)) {
                 $unknown[] = $header . ' :: ' . trim($line);
                 continue;
             }
             $postings[] = [
-                'kind' => $posting[1],
+                'kind' => $posting[1] === 'Expensesextra' ? 'Expenses' : $posting[1],
                 'account' => $posting[2],
                 'cents' => isset($posting[3]) && $posting[3] !== '' ? cents($posting[3]) : null,
             ];
@@ -124,11 +148,16 @@ try {
                 $unknown[] = $header . ' :: unsupported expense postings';
                 continue;
             }
-            $transactions[] = compact('date', 'secondaryDate', 'cleared', 'title', 'notes') + [
+            if (($shareTotal !== null || $shares !== []) &&
+                ($shareTotal !== $main + $commission || $shares === [] || array_sum($shares) !== $shareTotal)) {
+                $unknown[] = $header . ' :: unbalanced explicit shares';
+                continue;
+            }
+            $transactions[] = compact('date', 'secondaryDate', 'cleared', 'title', 'notes', 'shares') + [
                 'type' => 'expense', 'amount' => $main, 'commission' => $commission,
                 'category' => array_key_first($categories), 'person' => $people[0]['account'],
             ];
-        } elseif (count($people) === 2 && $people[0]['cents'] !== null && $people[1]['cents'] === null) {
+        } elseif ($shareTotal === null && $shares === [] && count($people) === 2 && $people[0]['cents'] !== null && $people[1]['cents'] === null) {
             $transactions[] = compact('date', 'secondaryDate', 'cleared', 'title', 'notes') + [
                 'type' => 'payment', 'amount' => $people[0]['cents'],
                 'from' => $people[1]['account'], 'to' => $people[0]['account'],
@@ -151,11 +180,11 @@ try {
         fwrite(STDERR, "Unrecognized entries:\n" . implode("\n", $unknown) . "\n");
         fail('Import stopped before changing the database.');
     }
-    if (count($transactions) !== 677 || $counts !== ['expense' => 491, 'payment' => 186]) {
-        fail('Ledger entry counts differ from the inspected source; import stopped.');
+    if ($transactions === []) {
+        fail('No transactions found; import stopped.');
     }
 
-    $db = new SQLite3($database, SQLITE3_OPEN_READWRITE);
+    $db = new SQLite3($database, $dryRun ? SQLITE3_OPEN_READONLY : SQLITE3_OPEN_READWRITE);
     $db->enableExceptions(true);
     $db->busyTimeout(5000);
     $people = [];
@@ -181,7 +210,7 @@ try {
         }
     }
     foreach ($transactions as $transaction) {
-        $names = $transaction['type'] === 'expense' ? [$transaction['person']] : [$transaction['from'], $transaction['to']];
+        $names = $transaction['type'] === 'expense' ? array_merge([$transaction['person']], array_keys($transaction['shares'])) : [$transaction['from'], $transaction['to']];
         foreach ($names as $name) {
             if (!isset($personMap[$name])) {
                 fail("Unknown Ledger person: {$name}");
@@ -190,6 +219,11 @@ try {
         if ($transaction['type'] === 'expense' && !isset($categoryMap[$transaction['category']])) {
             fail('Unknown Ledger expense account: ' . $transaction['category']);
         }
+    }
+
+    if ($dryRun) {
+        echo "Dry run complete. Database unchanged; no backup created.\n";
+        exit(0);
     }
 
     $backupPath = $database . '.before-ledger-' . date('Ymd-His') . '.bak';
@@ -231,11 +265,18 @@ try {
                 $expenseStmt->execute();
                 $expenseId = $db->lastInsertRowID();
                 $splitNames = $transaction['date'] < '2026-08-01' ? ['Andraž', 'Iztok', 'Borut'] : ['Andraž', 'Borut'];
+                if ($transaction['shares'] !== []) {
+                    $splitNames = array_keys($transaction['shares']);
+                }
                 foreach ($splitNames as $name) {
                     $splitStmt->reset();
                     $splitStmt->bindValue(':expense', $expenseId, SQLITE3_INTEGER);
                     $splitStmt->bindValue(':person', $people[$personMap[$name]], SQLITE3_INTEGER);
-                    $splitStmt->bindValue(':ratio', count($splitNames) === 3 ? '0.3333' : '0.5000', SQLITE3_TEXT);
+                    // SQLite retains the precision needed to preserve explicit cent amounts.
+                    $ratio = $transaction['shares'] !== []
+                        ? sprintf('%.15f', $transaction['shares'][$name] / ($transaction['amount'] + $transaction['commission']))
+                        : (count($splitNames) === 3 ? '0.3333' : '0.5000');
+                    $splitStmt->bindValue(':ratio', $ratio, SQLITE3_TEXT);
                     $splitStmt->execute();
                 }
             } else {

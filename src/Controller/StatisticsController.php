@@ -69,6 +69,7 @@ class StatisticsController extends AppController {
         $topExpenses = $expensesTable->find()
             ->contain(['PaidBy', 'ExpenseCategories'])
             ->select($expensesTable)
+            ->select($expensesTable->ExpenseCategories)
             ->select(['total' => '(Expenses.amount + Expenses.commission)'])
             ->select(['PaidBy.name'])
             ->order(['total' => 'DESC'])

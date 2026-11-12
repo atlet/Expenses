@@ -100,13 +100,6 @@
                     </div>
                 </div>
 
-                <div class="text-center text-muted mt-3">
-                    <small>
-                        <i class="ti ti-info-circle"></i>
-                        <?= __('Default credentials') ?>: <code>admin</code> / <code>admin123</code>
-                    </small>
-                </div>
-
                 <div class="text-center text-muted mt-4">
                     <small>
                         © <?= date('Y') ?> <?= __('Expense Tracker') ?>. <?= __('All rights reserved') ?>.

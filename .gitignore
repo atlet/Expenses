@@ -53,3 +53,8 @@ yarn-debug.log
 yarn-error.log
 db/app.sqlite
 /db/*.bak
+
+# Production runtime
+/.env
+/backups/
+/storage/

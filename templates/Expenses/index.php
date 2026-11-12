@@ -25,7 +25,7 @@ $this->Paginator->setTemplates([
             <?php foreach (['date_from' => 'Datum od', 'date_to' => 'Datum do'] as $key => $label): ?>
                 <div class="col-md-2"><?= $this->Form->control($key, ['type' => 'date', 'label' => $label, 'value' => $filters[$key] ?? '', 'class' => 'form-control']) ?></div>
             <?php endforeach; ?>
-            <?php foreach (['expense_category_id' => ['Kategorija', $categories], 'supplier_id' => ['Dobavitelj', $suppliers], 'paid_by_id' => ['Plačal', $people], 'status' => ['Status', ['paid' => __('Paid'), 'unpaid' => __('Unpaid')]]] as $key => [$label, $options]): ?>
+            <?php foreach (['expense_category_id' => ['Kategorija', ['none' => 'Brez kategorije'] + $categories->toArray()], 'supplier_id' => ['Dobavitelj', ['none' => 'Brez dobavitelja'] + $suppliers->toArray()], 'paid_by_id' => ['Plačal', $people], 'status' => ['Status', ['paid' => __('Paid'), 'unpaid' => __('Unpaid')]]] as $key => [$label, $options]): ?>
                 <div class="col-md-2"><?= $this->Form->control($key, ['type' => 'select', 'label' => $label, 'options' => $options, 'empty' => 'Vsi', 'value' => $filters[$key] ?? '', 'class' => 'form-select']) ?></div>
             <?php endforeach; ?>
             <div class="col-12 d-flex gap-2">

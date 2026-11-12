@@ -26,6 +26,12 @@ class ExpensesController extends AppController {
                 $query->where(['Expenses.' . $key => (int)$value]);
             }
         }
+        foreach (['expense_category_id', 'supplier_id'] as $key) {
+            if ($this->request->getQuery($key) === 'none') {
+                $filters[$key] = 'none';
+                $query->where(['Expenses.' . $key . ' IS' => null]);
+            }
+        }
         $status = $this->request->getQuery('status');
         if (in_array($status, ['paid', 'unpaid'], true)) {
             $filters['status'] = $status;

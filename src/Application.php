@@ -71,6 +71,7 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
      */
     public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue {
         $middlewareQueue
+            ->add(new \App\Middleware\TrustedProxyMiddleware())
             // Catch any exceptions in the lower layers,
             // and make an error page/response
             ->add(new ErrorHandlerMiddleware(Configure::read('Error'), $this))
